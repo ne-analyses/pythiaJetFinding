@@ -123,9 +123,9 @@ int main( int argc, const char** argv ) {
       break;
     }
     case 4: {
-      exponent = atoi( argv[1] );
-      outFile = argv[2];
-      xmldir = argv[3];
+      xmldir = argv[1];
+      exponent = atoi( argv[2] );
+      outFile = argv[3];
       break;
     }
     default: {
