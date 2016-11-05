@@ -103,6 +103,7 @@ void convertToPseudoJet( Pythia8::Pythia& p, double max_rap, std::vector<fastjet
 }
 
 // Arguments
+// 0: xml directory for pythia
 // 1: exponent base 10 for number of events
 // 2: output location
 
@@ -112,16 +113,19 @@ int main( int argc, const char** argv ) {
   // set parameters
   unsigned exponent;
   std::string outFile;
+  std::string xmldir
 
   switch ( argc ) {
     case 1: {
       exponent = 4;
       outFile = "out/test.root";
+      xmldir = "/Users/nick/physics/software/pythia8/share/Pythia8/xmldoc"
       break;
     }
-    case 3: {
+    case 4: {
       exponent = atoi( argv[1] );
       outFile = argv[2];
+      xmldir = argv[3];
       break;
     }
     default: {
@@ -138,7 +142,7 @@ int main( int argc, const char** argv ) {
   // ------------
   
   // create the pythia generator and initialize it with the xmldoc in my pythia8 directory
-  Pythia8::Pythia pythia("/Users/nick/physics/software/pythia8/share/Pythia8/xmldoc");
+  Pythia8::Pythia pythia( xmldir );
   
   // settings for LHC pp at 13 TeV
   pythia.readString("Beams:eCM = 13000");
