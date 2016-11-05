@@ -13,7 +13,7 @@ set xmldir = /nfs/rhi/STAR/software/pythia8/share/Pythia8/xmldoc
 
 # Now Submit jobs for each data file
 set i = 0
-while ( i < 20 )
+while ( $i < 20 )
 
 # Create the output file base name
 set OutBase = out/outfile_${i}
