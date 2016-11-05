@@ -137,6 +137,7 @@ int main( int argc, const char** argv ) {
   // set the total number of events as
   // 10^exponent
   unsigned maxEvent = pow( 10, exponent );
+  std::cout<<"set for "<<maxEvent<<" events"<<std::endl;
   
   // setup pythia
   // ------------
@@ -310,7 +311,7 @@ int main( int argc, const char** argv ) {
     std::cerr << "Caught " << e.what() << std::endl;
     return -1;
   }
-
+  std::cout<<"processed "<<currentEvent<<" events"<<std::endl;
   
   // print out pythia statistics
   pythia.stat();
