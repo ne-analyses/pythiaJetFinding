@@ -113,13 +113,13 @@ int main( int argc, const char** argv ) {
   // set parameters
   unsigned exponent;
   std::string outFile;
-  std::string xmldir
+  std::string xmldir;
 
   switch ( argc ) {
     case 1: {
       exponent = 4;
       outFile = "out/test.root";
-      xmldir = "/Users/nick/physics/software/pythia8/share/Pythia8/xmldoc"
+      xmldir = "/Users/nick/physics/software/pythia8/share/Pythia8/xmldoc";
       break;
     }
     case 4: {
