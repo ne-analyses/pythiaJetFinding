@@ -34,4 +34,6 @@ set arg = "$xmldir $exponent $outName"
 
 qsub -V -q erhiq -l mem=2GB -o $LogFile -e $ErrFile -N jetfinderAnalysis -- ${ExecPath}/submit/qwrap.sh ${ExecPath} $execute $arg
 
+i++
+
 end
