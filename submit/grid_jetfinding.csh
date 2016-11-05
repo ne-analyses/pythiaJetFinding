@@ -32,6 +32,6 @@ echo "Logging errors to " $ErrFile
 
 set arg = "$xmldir $exponent $outName"
 
-qsub -V -q erhiq -l mem=3GB -o $LogFile -e $ErrFile -N auauCorr -- ${ExecPath}/submit/qwrap.sh ${ExecPath} $execute $arg
+qsub -V -q erhiq -l mem=2GB -o $LogFile -e $ErrFile -N jetfinderAnalysis -- ${ExecPath}/submit/qwrap.sh ${ExecPath} $execute $arg
 
 end
