@@ -232,12 +232,12 @@ int main( int argc, const char** argv ) {
   TH2D* chargedEtaPhi = new TH2D( "chargedetaphi", "Detected Charged Eta x Phi",  100, -12, 12, 100, -TMath::Pi(), TMath::Pi() );
   
   // jet information
-  TH1D* nJetsAntiKtBaseAll = new TH1D("njetsantiktbase", "Jet Multiplicity Anti-Kt Base", 50, -0.5, 499.5);
-  TH1D* nJetsKtBaseAll = new TH1D("njetsktbase", "Jet Multiplicity Kt Base", 50, -0.5, 499.5);
-  TH1D* nJetsCaBaseAll = new TH1D("njetsCabase", "Jet Multiplicity CA Base", 50, -0.5, 499.5);
-  TH1D* nJetsAntiKtBaseCharged = new TH1D("njetsantiktbasecharged", "Jet Multiplicity Anti-Kt Base Charged", 50, -0.5, 499.5);
-  TH1D* nJetsKtBaseCharged = new TH1D("njetsktbasecharged", "Jet Multiplicity Kt Base Charged", 50, -0.5, 499.5);
-  TH1D* nJetsCaBaseCharged = new TH1D("njetsCabasecharged", "Jet Multiplicity CA Base Charged", 50, -0.5, 499.5);
+  TH1D* nJetsAntiKtBaseAll = new TH1D("njetsantiktbase", "Jet Multiplicity Anti-Kt Base", 50, 49.5, 299.5);
+  TH1D* nJetsKtBaseAll = new TH1D("njetsktbase", "Jet Multiplicity Kt Base", 50, 49.5, 299.5);
+  TH1D* nJetsCaBaseAll = new TH1D("njetsCabase", "Jet Multiplicity CA Base", 50, 49.5, 299.5);
+  TH1D* nJetsAntiKtBaseCharged = new TH1D("njetsantiktbasecharged", "Jet Multiplicity Anti-Kt Base Charged", 50, 49.5, 299.5);
+  TH1D* nJetsKtBaseCharged = new TH1D("njetsktbasecharged", "Jet Multiplicity Kt Base Charged", 50, 49.5, 299.5);
+  TH1D* nJetsCaBaseCharged = new TH1D("njetsCabasecharged", "Jet Multiplicity CA Base Charged", 50, 49.5, 299.5);
   
   // start the event loop from event 0
   unsigned currentEvent = 0;
