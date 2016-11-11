@@ -177,11 +177,11 @@ int main( int argc, const char** argv ) {
   fastjet::JetDefinition KtDefs[10];
   fastjet::JetDefinition CaDefs[10];
   
-  for ( int i = 1; i <= nRadii; ++i ) {
-    radii[i-1] = deltaRad * i;
-    antiKtDefs[i-1] = fastjet::JetDefinition( fastjet::antikt_algorithm, radii[i-1] );
-    KtDefs[i-1] = fastjet::JetDefinition( fastjet::antikt_algorithm, radii[i-1] );
-    CaDefs[i-1] = fastjet::JetDefinition( fastjet::cambridge_algorithm, radii[i-1] );
+  for ( int i = 0; i <= nRadii; ++i ) {
+    radii[i] = deltaRad * (i+1);
+    antiKtDefs[i] = fastjet::JetDefinition( fastjet::antikt_algorithm, radii[i] );
+    KtDefs[i] = fastjet::JetDefinition( fastjet::antikt_algorithm, radii[i] );
+    CaDefs[i] = fastjet::JetDefinition( fastjet::cambridge_algorithm, radii[i] );
   }
   
   
@@ -285,18 +285,31 @@ int main( int argc, const char** argv ) {
       
       // now set up the clustering
       fastjet::ClusterSequenceArea clusterAntiKtAll ( allFinal, antiKtBase, area_def );
-      std::vector<fastjet::PseudoJet> antiKtBaseJets = clusterAntiKtAll.inclusive_jets();
+      std::vector<fastjet::PseudoJet> antiKtBaseJets = fastjet::sorted_by_pt(clusterAntiKtAll.inclusive_jets());
       fastjet::ClusterSequenceArea clusterKtAll ( allFinal, KtBase, area_def );
-      std::vector<fastjet::PseudoJet> KtBaseJets = clusterKtAll.inclusive_jets();
+      std::vector<fastjet::PseudoJet> KtBaseJets = fastjet::sorted_by_pt(clusterKtAll.inclusive_jets());
       fastjet::ClusterSequenceArea clusterCaAll ( allFinal, CaBase, area_def );
-      std::vector<fastjet::PseudoJet> CaBaseJets = clusterCaAll.inclusive_jets();
+      std::vector<fastjet::PseudoJet> CaBaseJets = fastjet::sorted_by_pt(clusterCaAll.inclusive_jets());
       fastjet::ClusterSequenceArea clusterAntiKtCharged ( chargedFinal, antiKtBase, area_def );
-      std::vector<fastjet::PseudoJet> antiKtChargedJets = clusterAntiKtCharged.inclusive_jets();
+      std::vector<fastjet::PseudoJet> antiKtChargedJets = fastjet::sorted_by_pt(clusterAntiKtCharged.inclusive_jets());
       fastjet::ClusterSequenceArea clusterKtCharged ( chargedFinal, KtBase, area_def );
-      std::vector<fastjet::PseudoJet> KtChargedJets = clusterKtCharged.inclusive_jets();
+      std::vector<fastjet::PseudoJet> KtChargedJets = fastjet::sorted_by_pt(clusterKtCharged.inclusive_jets());
       fastjet::ClusterSequenceArea clusterCaCharged ( chargedFinal, CaBase, area_def );
-      std::vector<fastjet::PseudoJet> CaChargedJets = clusterCaCharged.inclusive_jets();
+      std::vector<fastjet::PseudoJet> CaChargedJets = fastjet::sorted_by_pt(clusterCaCharged.inclusive_jets());
       
+      // now we'll do the loop over differing radii
+      for ( int i = 0; i < nRadii; ++i ) {
+        
+        // first perform the clustering
+        fastjet::ClusterSequenceArea clusterAntiKt( allFinal, antiKtDefs[i], area_def );
+        fastjet::ClusterSequenceArea clusterKt( allFinal, KtDefs[i], area_def );
+        fastjet::ClusterSequenceArea clusterCa( allFinal, CaDefs[i], area_def );
+        
+        std::vector<fastjet::PseudoJet> antiKtJets = fastjet::sorted_by_pt( clusterAntiKt.inclusive_jets() );
+        std::vector<fastjet::PseudoJet> KtJets = fastjet::sorted_by_pt( clusterKt.inclusive_jets() );
+        std::vector<fastjet::PseudoJet> CaJets = fastjet::sorted_by_pt( clusterCa.inclusive_jets() );
+        
+      }
       
       // plot the number of jets by the different algorithms
       nJetsAntiKtBaseAll->Fill( antiKtBaseJets.size() );
