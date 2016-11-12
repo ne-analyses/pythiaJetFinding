@@ -259,36 +259,36 @@ int main( int argc, const char** argv ) {
   
   TH2D* nJetsKt = new TH2D( "njetskt", "Number of Jets - Kt", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );;
   TH2D* deltaEKt = new TH2D( "deltaEkt", "#Delta E - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
-  TH2D* deltaRKt = = new TH2D( "deltaRkt", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 )
+  TH2D* deltaRKt = new TH2D( "deltaRkt", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 )
   TH2D* nPartKt = new TH2D( "npartkt", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* nPartLeadKt = new TH2D( "npartleadKt", "Number of Particles per Leading Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
 
   
   TH2D* nJetsCa = new TH2D( "njetsca", "Number of Jets - CA", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );;
-  TH2D* deltaECa = = new TH2D( "deltaEca", "#Delta E - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
-  TH2D* deltaRCa = = new TH2D( "deltaRca", "#Delta R Leading - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
+  TH2D* deltaECa = new TH2D( "deltaEca", "#Delta E - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+  TH2D* deltaRCa = new TH2D( "deltaRca", "#Delta R Leading - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
   TH2D* nPartCa = new TH2D( "npartca", "Number of Particles per Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* nPartLeadCa = new TH2D( "npartleadca", "Number of Particles per Leading Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
 
   // set bin labels to radii
   for ( int i = 1; i <= nRadii; ++i ) {
-    nJetsAntiKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    deltaEAntiKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    deltaRAntiKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    nPartAntiKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    nPartLeadAntiKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nJetsAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    deltaEAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    deltaRAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nPartAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nPartLeadAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
     
-    nJetsKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    deltaEKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    deltaRKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    nPartKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    nPartLeadKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nJetsKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    deltaEKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    deltaRKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nPartKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nPartLeadKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
     
-    nJetsCa->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    deltaEca->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    deltaRca->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    nPartCa->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    nPartLeadCa->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nJetsCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    deltaEca->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    deltaRca->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nPartCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nPartLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
   }
   
   // start the event loop from event 0
