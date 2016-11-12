@@ -256,19 +256,27 @@ int main( int argc, const char** argv ) {
   TH2D* deltaRAntiKt = new TH2D( "deltaRantikt", "#Delta R Leading - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
   TH2D* nPartAntiKt = new TH2D( "npartantikt", "Number of Particles per Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* nPartLeadAntiKt = new TH2D( "npartleadantikt", "Number of Particles per Leading Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+  TH2D* timeAntiKt = new TH2D("clustertimeantikt", "Time Required to cluster - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 99.5);
+  TH2D* areaAntiKt = new TH2D("areaantikt", "Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
+  TH2D* areaLeadAntiKt = new TH2D("arealeadantikt", "Lead Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
   
   TH2D* nJetsKt = new TH2D( "njetskt", "Number of Jets - Kt", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );;
   TH2D* deltaEKt = new TH2D( "deltaEkt", "#Delta E - Kt", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
   TH2D* deltaRKt = new TH2D( "deltaRkt", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
   TH2D* nPartKt = new TH2D( "npartkt", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* nPartLeadKt = new TH2D( "npartleadKt", "Number of Particles per Leading Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
-
+  TH2D* timeKt = new TH2D("clustertimekt", "Time Required to cluster - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 99.5);
+  TH2D* areaKt = new TH2D("areakt", "Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
+  TH2D* areaLeadKt = new TH2D("arealeadkt", "Lead Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
   
   TH2D* nJetsCa = new TH2D( "njetsca", "Number of Jets - CA", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );
   TH2D* deltaECa = new TH2D( "deltaEca", "#Delta E - CA", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
   TH2D* deltaRCa = new TH2D( "deltaRca", "#Delta R Leading - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
   TH2D* nPartCa = new TH2D( "npartca", "Number of Particles per Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* nPartLeadCa = new TH2D( "npartleadca", "Number of Particles per Leading Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+  TH2D* timeCa = new TH2D("clustertimeca", "Time Required to cluster - CA", nRadii, -0.5, nRadii-0.5, 100, -0.5, 99.5);
+  TH2D* areaCa = new TH2D("areaca", "Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
+  TH2D* areaLeadCa = new TH2D("arealeadca", "Lead Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
 
   // set bin labels to radii
   for ( int i = 1; i <= nRadii; ++i ) {
@@ -277,18 +285,27 @@ int main( int argc, const char** argv ) {
     deltaRAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     nPartAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     nPartLeadAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    timeAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    areaAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    areaLeadAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
     
     nJetsKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     deltaEKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     deltaRKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     nPartKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     nPartLeadKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    timeKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    areaKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    areaLeadKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     
     nJetsCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     deltaECa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     deltaRCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     nPartCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     nPartLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    timeCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    areaCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    areaLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
   }
   
   // start the event loop from event 0
@@ -363,9 +380,22 @@ int main( int argc, const char** argv ) {
         std::string radBin = patch::to_string( radii[i] );
         
         // first perform the clustering
+        
+        // time the clustering as well
+        clock_t t = clock();
         fastjet::ClusterSequenceArea clusterAntiKt( allFinal, antiKtDefs[i], area_def );
+        clock_t antiKtTime = clock() - t;
+        t = clock();
         fastjet::ClusterSequenceArea clusterKt( allFinal, KtDefs[i], area_def );
+        clock_t ktTime = clock() - t;
+        t = clock();
         fastjet::ClusterSequenceArea clusterCa( allFinal, CaDefs[i], area_def );
+        clock_t caTime = clock() - t;
+        
+        // fill timing measurements
+        timeAntiKt->Fill( radBin.c_str(), antiKtTime, 1 );
+        timeKt->Fill( radBin.c_str(), ktTime, 1 );
+        timeCa->Fill( radBin.c_str(), caTime, 1 );
         
         std::vector<fastjet::PseudoJet> antiKtJets = fastjet::sorted_by_pt( clusterAntiKt.inclusive_jets() );
         std::vector<fastjet::PseudoJet> KtJets = fastjet::sorted_by_pt( clusterKt.inclusive_jets() );
@@ -377,17 +407,26 @@ int main( int argc, const char** argv ) {
         nJetsKt->Fill ( radBin.c_str(), KtJets.size(), 1 );
         nJetsCa->Fill ( radBin.c_str(), CaJets.size(), 1 );
         
-        // now, we'll do number of particles. both leading, and all
+        // now, we'll do number of particles, and area, for both both leading jets and inclusive jets
         nPartLeadAntiKt->Fill ( radBin.c_str(), antiKtJets[0].constituents().size(), 1 );
         nPartLeadKt->Fill ( radBin.c_str(), KtJets[0].constituents().size(), 1 );
         nPartLeadCa->Fill ( radBin.c_str(), CaJets[0].constituents().size(), 1 );
+        areaLeadAntiKt->Fill ( radBin.c_str(), antiKtJets[0].area(), 1 );
+        areaLeadKt->Fill ( radBin.c_str(), KtJets[0].area(), 1 );
+        areaLeadCa->Fill ( radBin.c_str(), CaJets[0].area(), 1 );
         
-        for ( int j = 0; j < antiKtJets.size(); ++j )
+        for ( int j = 0; j < antiKtJets.size(); ++j ) {
           nPartAntiKt->Fill ( radBin.c_str(), antiKtJets[j].constituents().size(), 1 );
-        for ( int j = 0; j < KtJets.size(); ++j )
+          areaAntiKt->Fill ( radBin.c_str(), antiKtJets[j].area(), 1 );
+        }
+        for ( int j = 0; j < KtJets.size(); ++j ) {
           nPartKt->Fill ( radBin.c_str(), KtJets[j].constituents().size(), 1 );
-        for ( int j = 0; j < CaJets.size(); ++j )
+          areaKt->Fill ( radBin.c_str(), KtJets[j].area(), 1 );
+        }
+        for ( int j = 0; j < CaJets.size(); ++j ) {
           nPartCa->Fill ( radBin.c_str(), CaJets[j].constituents().size(), 1 );
+          areaCa->Fill ( radBin.c_str(), CaJets[j].area(), 1 );
+        }
         
         // and compare to the initial partons for delta E and delta R
         // we find the minimum of the delta R between leading jet and parton1 and parton2
@@ -465,18 +504,27 @@ int main( int argc, const char** argv ) {
   nPartLeadAntiKt->Write();
   deltaEAntiKt->Write();
   deltaRAntiKt->Write();
+  timeAntiKt->Write();
+  areaAntiKt->Write();
+  areaLeadAntiKt->Write();
   
   nJetsKt->Write();
   nPartKt->Write();
   nPartLeadKt->Write();
   deltaEKt->Write();
   deltaRKt->Write();
+  timeKt->Write();
+  areaKt->Write();
+  areaLeadKt->Write();
   
   nJetsCa->Write();
   nPartCa->Write();
   nPartLeadCa->Write();
   deltaECa->Write();
   deltaRCa->Write();
+  timeCa->Write();
+  areaCa->Write();
+  areaLeadCa->Write();
   
   
   // close the output file
