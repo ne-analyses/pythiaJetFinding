@@ -259,12 +259,12 @@ int main( int argc, const char** argv ) {
   
   TH2D* nJetsKt = new TH2D( "njetskt", "Number of Jets - Kt", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );;
   TH2D* deltaEKt = new TH2D( "deltaEkt", "#Delta E - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
-  TH2D* deltaRKt = new TH2D( "deltaRkt", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 )
+  TH2D* deltaRKt = new TH2D( "deltaRkt", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
   TH2D* nPartKt = new TH2D( "npartkt", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* nPartLeadKt = new TH2D( "npartleadKt", "Number of Particles per Leading Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
 
   
-  TH2D* nJetsCa = new TH2D( "njetsca", "Number of Jets - CA", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );;
+  TH2D* nJetsCa = new TH2D( "njetsca", "Number of Jets - CA", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );
   TH2D* deltaECa = new TH2D( "deltaEca", "#Delta E - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* deltaRCa = new TH2D( "deltaRca", "#Delta R Leading - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
   TH2D* nPartCa = new TH2D( "npartca", "Number of Particles per Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
@@ -285,8 +285,8 @@ int main( int argc, const char** argv ) {
     nPartLeadKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     
     nJetsCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
-    deltaEca->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
-    deltaRca->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    deltaECa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    deltaRCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     nPartCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     nPartLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
   }
