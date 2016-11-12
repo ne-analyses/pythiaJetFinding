@@ -373,21 +373,21 @@ int main( int argc, const char** argv ) {
         
         // now start to fill histograms
         // first, number of jets in the event
-        nJetsAntiKt->Fill ( radBin, antiKtJets.size() );
-        nJetsKt->Fill ( radBin, KtJets.size() );
-        nJetsCa->Fill ( radBin, CaJets.size() );
+        nJetsAntiKt->Fill ( radBin, antiKtJets.size(), 1 );
+        nJetsKt->Fill ( radBin, KtJets.size(), 1 );
+        nJetsCa->Fill ( radBin, CaJets.size(), 1 );
         
         // now, we'll do number of particles. both leading, and all
-        nPartLeadAntiKt->Fill ( radBin, antiKtJets[0].constituents().size() );
-        nPartLeadKt->Fill ( radBin, KtJets[0].constituents().size() );
-        nPartLeadCa->Fill ( radBin, CaJets[0].constituents().size() );
+        nPartLeadAntiKt->Fill ( radBin, antiKtJets[0].constituents().size(), 1 );
+        nPartLeadKt->Fill ( radBin, KtJets[0].constituents().size(), 1 );
+        nPartLeadCa->Fill ( radBin, CaJets[0].constituents().size(), 1 );
         
         for ( int j = 0; j < antiKtJets.size(); ++j )
-          nPartAntiKt->Fill ( radBin, antiKtJets[j].constituents().size() );
+          nPartAntiKt->Fill ( radBin, antiKtJets[j].constituents().size(), 1 );
         for ( int j = 0; j < KtJets.size(); ++j )
-          nPartKt->Fill ( radBin, KtJets[j].constituents().size() );
+          nPartKt->Fill ( radBin, KtJets[j].constituents().size(), 1 );
         for ( int j = 0; j < CaJets.size(); ++j )
-          nPartCa->Fill ( radBin, CaJets[j].constituents().size() );
+          nPartCa->Fill ( radBin, CaJets[j].constituents().size(), 1 );
         
         // and compare to the initial partons for delta E and delta R
         // we find the minimum of the delta R between leading jet and parton1 and parton2
@@ -399,8 +399,8 @@ int main( int argc, const char** argv ) {
         int partonIdx = 0;
         if ( distToPart2 < distToPart1 )
           partonIdx = 1;
-        deltaRAntiKt->Fill ( radBin, partons[partonIdx].delta_R( antiKtJets[0] ) );
-        deltaEAntiKt->Fill ( radBin, partons[partonIdx].E() - antiKtJets[0].E() );
+        deltaRAntiKt->Fill ( radBin, partons[partonIdx].delta_R( antiKtJets[0] ), 1 );
+        deltaEAntiKt->Fill ( radBin, partons[partonIdx].E() - antiKtJets[0].E(), 1 );
         
         // repeat for Kt and Ca
         distToPart1 = partons[0].delta_R( KtJets[0] );
@@ -408,16 +408,16 @@ int main( int argc, const char** argv ) {
         partonIdx = 0;
         if ( distToPart2 < distToPart1 )
           partonIdx = 1;
-        deltaRKt->Fill ( radBin, partons[partonIdx].delta_R( KtJets[0] ) );
-        deltaEKt->Fill ( radBin, partons[partonIdx].E() - KtJets[0].E() );
+        deltaRKt->Fill ( radBin, partons[partonIdx].delta_R( KtJets[0] ), 1 );
+        deltaEKt->Fill ( radBin, partons[partonIdx].E() - KtJets[0].E(), 1 );
         
         distToPart1 = partons[0].delta_R( CaJets[0] );
         distToPart2 = partons[1].delta_R( CaJets[0] );
         partonIdx = 0;
         if ( distToPart2 < distToPart1 )
           partonIdx = 1;
-        deltaRCa->Fill ( radBin, partons[partonIdx].delta_R( CaJets[0] ) );
-        deltaECa->Fill ( radBin, partons[partonIdx].E() - CaJets[0].E() );
+        deltaRCa->Fill ( radBin, partons[partonIdx].delta_R( CaJets[0] ), 1 );
+        deltaECa->Fill ( radBin, partons[partonIdx].E() - CaJets[0].E(), 1 );
         
       }
       
