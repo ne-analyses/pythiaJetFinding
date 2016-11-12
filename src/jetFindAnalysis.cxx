@@ -280,6 +280,7 @@ int main( int argc, const char** argv ) {
 
   // set bin labels to radii
   for ( int i = 1; i <= nRadii; ++i ) {
+    std::cout<<"HERE"<<std::endl;
     nJetsAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     deltaEAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     deltaRAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
