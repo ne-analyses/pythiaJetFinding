@@ -61,6 +61,18 @@
 // Pythia generator
 #include "Pythia8/Pythia.h"
 
+// the grid does not have std::to_string() for some ungodly reason
+// replacing it here. Simply ostringstream
+namespace patch {
+  template < typename T > std::string to_string( const T& n )
+  {
+    std::ostringstream stm ;
+    stm << n ;
+    return stm.str() ;
+  }
+}
+
+// used to convert pythia events to vectors of pseudojets
 void convertToPseudoJet( Pythia8::Pythia& p, double max_rap, std::vector<fastjet::PseudoJet>& all, std::vector<fastjet::PseudoJet>& charged, std::vector<fastjet::PseudoJet>& part ) {
   
   // clear the event containers
@@ -238,6 +250,65 @@ int main( int argc, const char** argv ) {
   TH1D* nJetsAntiKtBaseCharged = new TH1D("njetsantiktbasecharged", "Jet Multiplicity Anti-Kt Base Charged", 50, 49.5, 299.5);
   TH1D* nJetsKtBaseCharged = new TH1D("njetsktbasecharged", "Jet Multiplicity Kt Base Charged", 50, 49.5, 299.5);
   TH1D* nJetsCaBaseCharged = new TH1D("njetsCabasecharged", "Jet Multiplicity CA Base Charged", 50, 49.5, 299.5);
+  
+  // make a histogram for all of the differing radii
+  TH1D* nJetsAntiKt[nRadii];
+  TH1D* deltaEAntiKt[nRadii];
+  TH1D* deltaRAntiKt[nRadii];
+  TH1D* nPartAntiKt[nRadii];
+  
+  TH1D* nJetsKt[nRadii];
+  TH1D* deltaEKt[nRadii];
+  TH1D* deltaRKt[nRadii];
+  TH1D* nPartKt[nRadii];
+  
+  TH1D* nJetsCa[nRadii];
+  TH1D* deltaECa[nRadii];
+  TH1D* deltaRCa[nRadii];
+  TH1D* nPartCa[nRadii];
+  
+  for ( int i = 0; i < nRadii; ++i ) {
+    
+    std::string nJetBaseName = "tmp/njets_";
+    std::string nPartBaseName = "tmp/nparts_";
+    std::string deltaEBaseName = "tmp/deltaE_";
+    std::string deltaRBaseName = "tmp/deltaR_";
+    
+    std::string antiKtBaseName = "antikt_";
+    std::string ktBaseName = "kt_";
+    std::string caBaseName = "ca_";
+    
+    std::string antiKtJetName = nJetBaseName + antiKtBaseName + patch::to_string(i);
+    std::string antiKtPartName = nPartBaseName + antiKtBaseName + patch::to_string(i);
+    std::string antiKtDeltaEName = deltaEBaseName + antiKtBaseName + patch::to_string(i);
+    std::string antiKtDeltaRName = deltaRBaseName + antiKtBaseName + patch::to_string(i);
+    
+    nJetsAntiKt[i] = new TH1D( antiKtJetName.c_str(), antiKtJetName.c_str(), 200, -0.5, 199.5 );
+    nPartAntiKt[i] = new TH1D( antiKtPartName.c_str(), antiKtPartName.c_str(), 200, -0.5, 199.5 );
+    deltaEAntiKt[i] = new TH1D( antiKtDeltaEName.c_str(), antiKtDeltaEName.c_str(), 200, -0.5, 100 );
+    deltaRAntiKt[i] = new TH1D( antiKtDeltaRName.c_str(), antiKtDeltaRName.c_str(), 200, 0.0, 1.0 );
+    
+    std::string KtJetName = nJetBaseName + ktBaseName + patch::to_string(i);
+    std::string KtPartName = nPartBaseName + ktBaseName + patch::to_string(i);
+    std::string KtDeltaEName = deltaEBaseName + ktBaseName + patch::to_string(i);
+    std::string KtDeltaRName = deltaRBaseName + ktBaseName + patch::to_string(i);
+    
+    nJetsKt[i] = new TH1D( KtJetName.c_str(), KtJetName.c_str(), 200, -0.5, 199.5 );
+    nPartKt[i] = new TH1D( KtPartName.c_str(), KtPartName.c_str(), 200, -0.5, 199.5 );
+    deltaEKt[i] = new TH1D( KtDeltaEName.c_str(), KtDeltaEName.c_str(), 200, -0.5, 100 );
+    deltaRKt[i] = new TH1D( KtDeltaRName.c_str(), KtDeltaRName.c_str(), 200, 0.0, 1.0 );
+    
+    std::string CaJetName = nJetBaseName + caBaseName + patch::to_string(i);
+    std::string CaPartName = nPartBaseName + caBaseName + patch::to_string(i);
+    std::string CaDeltaEName = deltaEBaseName + caBaseName + patch::to_string(i);
+    std::string CaDeltaRName = deltaRBaseName + caBaseName + patch::to_string(i);
+    
+    nJetsCa[i] = new TH1D( CaJetName.c_str(), CaJetName.c_str(), 200, -0.5, 199.5 );
+    nPartCa[i] = new TH1D( CaPartName.c_str(), CaPartName.c_str(), 200, -0.5, 199.5 );
+    deltaECa[i] = new TH1D( CaDeltaEName.c_str(), CaDeltaEName.c_str(), 200, -0.5, 100 );
+    deltaRCa[i] = new TH1D( CaDeltaRName.c_str(), CaDeltaRName.c_str(), 200, 0.0, 1.0 );
+    
+  }
   
   // start the event loop from event 0
   unsigned currentEvent = 0;
