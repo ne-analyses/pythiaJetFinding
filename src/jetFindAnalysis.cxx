@@ -252,20 +252,20 @@ int main( int argc, const char** argv ) {
   
   // make a histogram for all of the differing radii
   TH2D* nJetsAntiKt = new TH2D( "njetsantikt", "Number of Jets - Anti-Kt", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );
-  TH2D* deltaEAntiKt = new TH2D( "deltaEantikt", "#Delta E - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+  TH2D* deltaEAntiKt = new TH2D( "deltaEantikt", "#Delta E - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
   TH2D* deltaRAntiKt = new TH2D( "deltaRantikt", "#Delta R Leading - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
   TH2D* nPartAntiKt = new TH2D( "npartantikt", "Number of Particles per Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* nPartLeadAntiKt = new TH2D( "npartleadantikt", "Number of Particles per Leading Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   
   TH2D* nJetsKt = new TH2D( "njetskt", "Number of Jets - Kt", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );;
-  TH2D* deltaEKt = new TH2D( "deltaEkt", "#Delta E - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+  TH2D* deltaEKt = new TH2D( "deltaEkt", "#Delta E - Kt", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
   TH2D* deltaRKt = new TH2D( "deltaRkt", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
   TH2D* nPartKt = new TH2D( "npartkt", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* nPartLeadKt = new TH2D( "npartleadKt", "Number of Particles per Leading Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
 
   
   TH2D* nJetsCa = new TH2D( "njetsca", "Number of Jets - CA", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );
-  TH2D* deltaECa = new TH2D( "deltaEca", "#Delta E - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+  TH2D* deltaECa = new TH2D( "deltaEca", "#Delta E - CA", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
   TH2D* deltaRCa = new TH2D( "deltaRca", "#Delta R Leading - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
   TH2D* nPartCa = new TH2D( "npartca", "Number of Particles per Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* nPartLeadCa = new TH2D( "npartleadca", "Number of Particles per Leading Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
@@ -349,8 +349,18 @@ int main( int argc, const char** argv ) {
       fastjet::ClusterSequenceArea clusterCaCharged ( chargedFinal, CaBase, area_def );
       std::vector<fastjet::PseudoJet> CaChargedJets = fastjet::sorted_by_pt(clusterCaCharged.inclusive_jets());
       
+      // plot the number of jets by the different algorithms
+      nJetsAntiKtBaseAll->Fill( antiKtBaseJets.size() );
+      nJetsKtBaseAll->Fill( KtBaseJets.size() );
+      nJetsCaBaseAll->Fill( CaBaseJets.size() );
+      nJetsAntiKtBaseCharged->Fill( antiKtChargedJets.size() );
+      nJetsKtBaseCharged->Fill( KtChargedJets.size() );
+      nJetsCaBaseCharged->Fill( CaChargedJets.size() );
+      
       // now we'll do the loop over differing radii
       for ( int i = 0; i < nRadii; ++i ) {
+        
+        std::string radBin = patch::to_string( radii[i].c_str() );
         
         // first perform the clustering
         fastjet::ClusterSequenceArea clusterAntiKt( allFinal, antiKtDefs[i], area_def );
@@ -361,15 +371,55 @@ int main( int argc, const char** argv ) {
         std::vector<fastjet::PseudoJet> KtJets = fastjet::sorted_by_pt( clusterKt.inclusive_jets() );
         std::vector<fastjet::PseudoJet> CaJets = fastjet::sorted_by_pt( clusterCa.inclusive_jets() );
         
+        // now start to fill histograms
+        // first, number of jets in the event
+        nJetsAntiKt->Fill ( radBin, antiKtJets.size() );
+        nJetsKt->Fill ( radBin, KtJets.size() );
+        nJetsCa->Fill ( radBin, CaJets.size() );
+        
+        // now, we'll do number of particles. both leading, and all
+        nPartLeadAntiKt->Fill ( radBin, antiKtJets[0].constituents().size() );
+        nPartLeadKt->Fill ( radBin, KtJets[0].constituents().size() );
+        nPartLeadCa->Fill ( radBin, CaJets[0].constituents().size() );
+        
+        for ( int j = 0; j < antiKtJets.size(); ++j )
+          nPartAntiKt->Fill ( radBin, antiKtJets[j].constituents().size() );
+        for ( int j = 0; j < KtJets.size(); ++j )
+          nPartKt->Fill ( radBin, KtJets[j].constituents().size() );
+        for ( int j = 0; j < CaJets.size(); ++j )
+          nPartCa->Fill ( radBin, CaJets[j].constituents().size() );
+        
+        // and compare to the initial partons for delta E and delta R
+        // we find the minimum of the delta R between leading jet and parton1 and parton2
+        // and use that as the base for both delta R and delta E
+        
+        // first antikt
+        double distToPart1 = partons[0].delta_R(antiKtJets[0]);
+        double distToPart2 = partons[1].delta_R(antiKtJets[0]);
+        int partonIdx = 0;
+        if ( distToPart2 < distToPart1 )
+          partonIdx = 1;
+        deltaRAntiKt->Fill ( radBin, partons[partonIdx].delta_R( antiKtJets[0] ) );
+        deltaEAntiKt->Fill ( radBin, partons[partonIdx].E() - antiKtJets[0].E() );
+        
+        // repeat for Kt and Ca
+        distToPart1 = partons[0].delta_R( KtJets[0] );
+        distToPart2 = partons[1].delta_R( KtJets[0] );
+        partonIdx = 0;
+        if ( distToPart2 < distToPart1 )
+          partonIdx = 1;
+        deltaRKt->Fill ( radBin, partons[partonIdx].delta_R( KtJets[0] ) );
+        deltaEKt->Fill ( radBin, partons[partonIdx].E() - KtJets[0].E() );
+        
+        distToPart1 = partons[0].delta_R( CaJets[0] );
+        distToPart2 = partons[1].delta_R( CaJets[0] );
+        partonIdx = 0;
+        if ( distToPart2 < distToPart1 )
+          partonIdx = 1;
+        deltaRCa->Fill ( radBin, partons[partonIdx].delta_R( CaJets[0] ) );
+        deltaECa->Fill ( radBin, partons[partonIdx].E() - CaJets[0].E() );
+        
       }
-      
-      // plot the number of jets by the different algorithms
-      nJetsAntiKtBaseAll->Fill( antiKtBaseJets.size() );
-      nJetsKtBaseAll->Fill( KtBaseJets.size() );
-      nJetsCaBaseAll->Fill( CaBaseJets.size() );
-      nJetsAntiKtBaseCharged->Fill( antiKtChargedJets.size() );
-      nJetsKtBaseCharged->Fill( KtChargedJets.size() );
-      nJetsCaBaseCharged->Fill( CaChargedJets.size() );
       
     }
   } catch ( std::exception& e) {
@@ -408,6 +458,25 @@ int main( int argc, const char** argv ) {
   nJetsAntiKtBaseCharged->Write();
   nJetsKtBaseCharged->Write();
   nJetsCaBaseCharged->Write();
+  
+  // histograms for differing radii
+  nJetsAntiKt->Write();
+  nPartAntiKt->Write();
+  nPartLeadAntiKt->Write();
+  deltaEAntiKt->Write();
+  deltaRAntiKt->Write();
+  
+  nJetsKt->Write();
+  nPartKt->Write();
+  nPartLeadKt->Write();
+  deltaEKt->Write();
+  deltaRKt->Write();
+  
+  nJetsCa->Write();
+  nPartCa->Write();
+  nPartLeadCa->Write();
+  deltaECa->Write();
+  deltaRCa->Write();
   
   
   // close the output file
