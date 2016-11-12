@@ -316,18 +316,19 @@ int main( int argc, const char** argv ) {
       // try to generate a new event
       // if it fails, iterate without incrementing
       // current event number
+      std::cout<<"here"<<std::endl;
       if ( !pythia.next() )
         continue;
-      
+      std::cout<<"here"<<std::endl;
       // pythia succeeded, so increment the event
       currentEvent++;
-      std::cout<<"count event"<<std::endl;
+
       // convert pythia particles into useable pseudojets,
       // only take those in our eta range && that are visible
       // in conventional detectors
       // note: particles user_index() is the charge
       convertToPseudoJet( pythia, max_track_rap, allFinal, chargedFinal, partons );
-      std::cout<<"convert"<<std::endl;
+
       // event information
       multiplicity->Fill( allFinal.size() );
       chargedMultiplicity->Fill( chargedFinal.size() );
@@ -353,7 +354,6 @@ int main( int argc, const char** argv ) {
       }
       
       // now set up the clustering
-      std::cout<<"got here"<<std::endl;
       fastjet::ClusterSequenceArea clusterAntiKtAll ( allFinal, antiKtBase, area_def );
       std::vector<fastjet::PseudoJet> antiKtBaseJets = fastjet::sorted_by_pt(clusterAntiKtAll.inclusive_jets());
       fastjet::ClusterSequenceArea clusterKtAll ( allFinal, KtBase, area_def );
@@ -366,7 +366,7 @@ int main( int argc, const char** argv ) {
       std::vector<fastjet::PseudoJet> KtChargedJets = fastjet::sorted_by_pt(clusterKtCharged.inclusive_jets());
       fastjet::ClusterSequenceArea clusterCaCharged ( chargedFinal, CaBase, area_def );
       std::vector<fastjet::PseudoJet> CaChargedJets = fastjet::sorted_by_pt(clusterCaCharged.inclusive_jets());
-      std::cout<<"and here"<<std::endl;
+
       // plot the number of jets by the different algorithms
       nJetsAntiKtBaseAll->Fill( antiKtBaseJets.size() );
       nJetsKtBaseAll->Fill( KtBaseJets.size() );
@@ -374,10 +374,10 @@ int main( int argc, const char** argv ) {
       nJetsAntiKtBaseCharged->Fill( antiKtChargedJets.size() );
       nJetsKtBaseCharged->Fill( KtChargedJets.size() );
       nJetsCaBaseCharged->Fill( CaChargedJets.size() );
-      std::cout<<"and here"<<std::endl;
+
       // now we'll do the loop over differing radii
       for ( int i = 0; i < nRadii; ++i ) {
-        std::cout<<"got here"<<std::endl;
+
         std::string radBin = patch::to_string( radii[i] );
         
         // first perform the clustering
