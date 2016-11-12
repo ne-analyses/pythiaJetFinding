@@ -376,7 +376,7 @@ int main( int argc, const char** argv ) {
       
       // now we'll do the loop over differing radii
       for ( int i = 0; i < nRadii; ++i ) {
-        
+        std::cout<<"got here"<<std::endl;
         std::string radBin = patch::to_string( radii[i] );
         
         // first perform the clustering
