@@ -196,7 +196,6 @@ int main( int argc, const char** argv ) {
     CaDefs[i] = fastjet::JetDefinition( fastjet::cambridge_algorithm, radii[i] );
   }
   
-  
   // set up our fastjet environment
   // ------------------------------
   
@@ -252,62 +251,44 @@ int main( int argc, const char** argv ) {
   TH1D* nJetsCaBaseCharged = new TH1D("njetsCabasecharged", "Jet Multiplicity CA Base Charged", 50, 49.5, 299.5);
   
   // make a histogram for all of the differing radii
-  TH1D* nJetsAntiKt[nRadii];
-  TH1D* deltaEAntiKt[nRadii];
-  TH1D* deltaRAntiKt[nRadii];
-  TH1D* nPartAntiKt[nRadii];
+  TH2D* nJetsAntiKt = new TH2D( "njetsantikt", "Number of Jets - Anti-Kt", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );
+  TH2D* deltaEAntiKt = new TH2D( "deltaEantikt", "#Delta E - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+  TH2D* deltaRAntiKt = new TH2D( "deltaRantikt", "#Delta R Leading - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
+  TH2D* nPartAntiKt = new TH2D( "npartantikt", "Number of Particles per Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+  TH2D* nPartLeadAntiKt = new TH2D( "npartleadantikt", "Number of Particles per Leading Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   
-  TH1D* nJetsKt[nRadii];
-  TH1D* deltaEKt[nRadii];
-  TH1D* deltaRKt[nRadii];
-  TH1D* nPartKt[nRadii];
+  TH2D* nJetsKt = new TH2D( "njetskt", "Number of Jets - Kt", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );;
+  TH2D* deltaEKt = new TH2D( "deltaEkt", "#Delta E - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+  TH2D* deltaRKt = = new TH2D( "deltaRkt", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 )
+  TH2D* nPartKt = new TH2D( "npartkt", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+  TH2D* nPartLeadKt = new TH2D( "npartleadKt", "Number of Particles per Leading Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+
   
-  TH1D* nJetsCa[nRadii];
-  TH1D* deltaECa[nRadii];
-  TH1D* deltaRCa[nRadii];
-  TH1D* nPartCa[nRadii];
-  
-  for ( int i = 0; i < nRadii; ++i ) {
+  TH2D* nJetsCa = new TH2D( "njetsca", "Number of Jets - CA", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );;
+  TH2D* deltaECa = = new TH2D( "deltaEca", "#Delta E - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+  TH2D* deltaRCa = = new TH2D( "deltaRca", "#Delta R Leading - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
+  TH2D* nPartCa = new TH2D( "npartca", "Number of Particles per Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+  TH2D* nPartLeadCa = new TH2D( "npartleadca", "Number of Particles per Leading Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
+
+  // set bin labels to radii
+  for ( int i = 1; i <= nRadii; ++i ) {
+    nJetsAntiKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    deltaEAntiKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    deltaRAntiKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nPartAntiKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nPartLeadAntiKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
     
-    std::string nJetBaseName = "tmp/njets_";
-    std::string nPartBaseName = "tmp/nparts_";
-    std::string deltaEBaseName = "tmp/deltaE_";
-    std::string deltaRBaseName = "tmp/deltaR_";
+    nJetsKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    deltaEKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    deltaRKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nPartKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nPartLeadKt->SetBinLabel( i, patch::to_string( radii[i-1] ) );
     
-    std::string antiKtBaseName = "antikt_";
-    std::string ktBaseName = "kt_";
-    std::string caBaseName = "ca_";
-    
-    std::string antiKtJetName = nJetBaseName + antiKtBaseName + patch::to_string(i);
-    std::string antiKtPartName = nPartBaseName + antiKtBaseName + patch::to_string(i);
-    std::string antiKtDeltaEName = deltaEBaseName + antiKtBaseName + patch::to_string(i);
-    std::string antiKtDeltaRName = deltaRBaseName + antiKtBaseName + patch::to_string(i);
-    
-    nJetsAntiKt[i] = new TH1D( antiKtJetName.c_str(), antiKtJetName.c_str(), 200, -0.5, 199.5 );
-    nPartAntiKt[i] = new TH1D( antiKtPartName.c_str(), antiKtPartName.c_str(), 200, -0.5, 199.5 );
-    deltaEAntiKt[i] = new TH1D( antiKtDeltaEName.c_str(), antiKtDeltaEName.c_str(), 200, -0.5, 100 );
-    deltaRAntiKt[i] = new TH1D( antiKtDeltaRName.c_str(), antiKtDeltaRName.c_str(), 200, 0.0, 1.0 );
-    
-    std::string KtJetName = nJetBaseName + ktBaseName + patch::to_string(i);
-    std::string KtPartName = nPartBaseName + ktBaseName + patch::to_string(i);
-    std::string KtDeltaEName = deltaEBaseName + ktBaseName + patch::to_string(i);
-    std::string KtDeltaRName = deltaRBaseName + ktBaseName + patch::to_string(i);
-    
-    nJetsKt[i] = new TH1D( KtJetName.c_str(), KtJetName.c_str(), 200, -0.5, 199.5 );
-    nPartKt[i] = new TH1D( KtPartName.c_str(), KtPartName.c_str(), 200, -0.5, 199.5 );
-    deltaEKt[i] = new TH1D( KtDeltaEName.c_str(), KtDeltaEName.c_str(), 200, -0.5, 100 );
-    deltaRKt[i] = new TH1D( KtDeltaRName.c_str(), KtDeltaRName.c_str(), 200, 0.0, 1.0 );
-    
-    std::string CaJetName = nJetBaseName + caBaseName + patch::to_string(i);
-    std::string CaPartName = nPartBaseName + caBaseName + patch::to_string(i);
-    std::string CaDeltaEName = deltaEBaseName + caBaseName + patch::to_string(i);
-    std::string CaDeltaRName = deltaRBaseName + caBaseName + patch::to_string(i);
-    
-    nJetsCa[i] = new TH1D( CaJetName.c_str(), CaJetName.c_str(), 200, -0.5, 199.5 );
-    nPartCa[i] = new TH1D( CaPartName.c_str(), CaPartName.c_str(), 200, -0.5, 199.5 );
-    deltaECa[i] = new TH1D( CaDeltaEName.c_str(), CaDeltaEName.c_str(), 200, -0.5, 100 );
-    deltaRCa[i] = new TH1D( CaDeltaRName.c_str(), CaDeltaRName.c_str(), 200, 0.0, 1.0 );
-    
+    nJetsCa->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    deltaEca->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    deltaRca->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nPartCa->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nPartLeadCa->SetBinLabel( i, patch::to_string( radii[i-1] ) );
   }
   
   // start the event loop from event 0
