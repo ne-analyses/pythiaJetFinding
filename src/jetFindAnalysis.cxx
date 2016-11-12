@@ -272,23 +272,23 @@ int main( int argc, const char** argv ) {
 
   // set bin labels to radii
   for ( int i = 1; i <= nRadii; ++i ) {
-    nJetsAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    deltaEAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    deltaRAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    nPartAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    nPartLeadAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nJetsAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    deltaEAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    deltaRAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    nPartAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    nPartLeadAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     
-    nJetsKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    deltaEKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    deltaRKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    nPartKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    nPartLeadKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nJetsKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    deltaEKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    deltaRKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    nPartKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    nPartLeadKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     
-    nJetsCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    deltaEca->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    deltaRca->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    nPartCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
-    nPartLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ) );
+    nJetsCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    deltaEca->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    deltaRca->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    nPartCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    nPartLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
   }
   
   // start the event loop from event 0
