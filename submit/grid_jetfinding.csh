@@ -13,7 +13,7 @@ set xmldir = /wsu/home/dx/dx54/dx5412/software/pythia8212/share/Pythia8/xmldoc
 
 # Now Submit jobs for each data file
 set i = 0
-while ( $i < 1 )
+while ( $i < 30 )
 
 # Create the output file base name
 set OutBase = out/outfile_${i}
