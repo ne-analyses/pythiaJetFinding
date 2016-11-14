@@ -4,7 +4,7 @@ os = $(shell uname -s)
 INCFLAGS      = -I$(ROOTSYS)/include -I$(FASTJETDIR)/include -I/opt/local/include -I$(PYTHIA8DIR)/include
 
 ifeq ($(os),Linux)
-CXXFLAGS      = -std=c++11
+CXXFLAGS      = -std=c++11 -c ${PYTHIA8DIR}/lib/libpythia8.a
 else
 CXXFLAGS      = -O -fPIC -pipe -Wall -Wno-deprecated-writable-strings -Wno-unused-variable -Wno-unused-private-field -Wno-gnu-static-float-init -std=c++11
 ## for debugging:
@@ -21,7 +21,7 @@ LDFLAGSSS     = -bundle
 endif
 
 ifeq ($(os),Linux)
-CXX          = g++ 
+CXX          = g++
 else
 CXX          = clang
 endif
@@ -30,7 +30,8 @@ endif
 ROOTLIBS      = $(shell root-config --libs)
 
 LIBPATH       = $(ROOTLIBS) -L$(FASTJETDIR)/lib -L$(PYTHIA8DIR)/lib
-LIBS          = -lfastjet -lfastjettools -lpythia8
+LIBS          = -lfastjet -lfastjettools
+#-lpythia8
 
 
 # for cleanup
