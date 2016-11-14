@@ -168,9 +168,7 @@ int main( int argc, const char** argv ) {
   
   // initialize the pythia generator
   pythia.init();
-  pythia.next();
   
-  /*
   // set jet finding parameters
   // --------------------------
   
@@ -534,7 +532,7 @@ int main( int argc, const char** argv ) {
   
   // close the output file
   out.Close();
-  */
+
   return 0;
 }
 
