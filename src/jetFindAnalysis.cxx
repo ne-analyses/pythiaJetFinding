@@ -132,7 +132,7 @@ int main( int argc, const char** argv ) {
       exponent = 4;
       outFile = "out/test.root";
       //xmldir = "/Users/nick/physics/software/pythia8/share/Pythia8/xmldoc";
-      xmldir = /wsu/home/dx/dx54/dx5412/software/pythia8212/share/Pythia8/xmldoc;
+      xmldir = "/wsu/home/dx/dx54/dx5412/software/pythia8212/share/Pythia8/xmldoc";
       break;
     }
     case 4: {
