@@ -311,6 +311,9 @@ int main( int argc, const char** argv ) {
     areaLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
   }
   
+  pythia.next();
+  /*
+  
   // start the event loop from event 0
   unsigned currentEvent = 0;
   try{
@@ -532,7 +535,7 @@ int main( int argc, const char** argv ) {
   
   // close the output file
   out.Close();
-
+*/
   return 0;
 }
 
