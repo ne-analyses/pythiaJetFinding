@@ -181,7 +181,7 @@ int main( int argc, const char** argv ) {
   fastjet::JetDefinition antiKtBase( fastjet::antikt_algorithm, baseRadius );
   fastjet::JetDefinition KtBase( fastjet::kt_algorithm, baseRadius );
   fastjet::JetDefinition CaBase( fastjet::cambridge_algorithm, baseRadius );
-  
+  std::cout<<"and here"<<std::endl;
   // but we will also be testing these with different radii, so we'll initialize that here
   // there will be nRadii different radii, in increments of deltaRad;
   int nRadii = 10;
