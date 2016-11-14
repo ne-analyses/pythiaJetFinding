@@ -171,7 +171,7 @@ int main( int argc, const char** argv ) {
   pythia.next();
   // set jet finding parameters
   // --------------------------
-  std::cout<<"got here"<<std::endl;
+
   // set a hard cut on rapidity for all tracks
   const double max_track_rap = 10;
   const double max_rap = max_track_rap;
@@ -181,7 +181,7 @@ int main( int argc, const char** argv ) {
   fastjet::JetDefinition antiKtBase( fastjet::antikt_algorithm, baseRadius );
   fastjet::JetDefinition KtBase( fastjet::kt_algorithm, baseRadius );
   fastjet::JetDefinition CaBase( fastjet::cambridge_algorithm, baseRadius );
-  std::cout<<"and here"<<std::endl;
+
   // but we will also be testing these with different radii, so we'll initialize that here
   // there will be nRadii different radii, in increments of deltaRad;
   int nRadii = 10;
@@ -191,14 +191,14 @@ int main( int argc, const char** argv ) {
   fastjet::JetDefinition KtDefs[10];
   fastjet::JetDefinition CaDefs[10];
   
-  for ( int i = 0; i <= nRadii; ++i ) {
+  for ( int i = 0; i < nRadii; ++i ) {
     radii[i] = deltaRad * (i+1);
-    std::cout<<"rad: "<<radii[i]<<std::endl;
+
     antiKtDefs[i] = fastjet::JetDefinition( fastjet::antikt_algorithm, radii[i] );
     KtDefs[i] = fastjet::JetDefinition( fastjet::antikt_algorithm, radii[i] );
     CaDefs[i] = fastjet::JetDefinition( fastjet::cambridge_algorithm, radii[i] );
   }
-  std::cout<<"got here"<<std::endl;
+
   // set up our fastjet environment
   // ------------------------------
   
@@ -215,7 +215,7 @@ int main( int argc, const char** argv ) {
   // this will be the two partons from the scattering
   std::vector<fastjet::PseudoJet> partons;
   
-  std::cout<<"and here"<<std::endl;
+  
   
   // create an area definition for the clustering
   //----------------------------------------------------------
@@ -313,8 +313,6 @@ int main( int argc, const char** argv ) {
     areaCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     areaLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
   }
-  
-  /*
   
   // start the event loop from event 0
   unsigned currentEvent = 0;
@@ -537,7 +535,7 @@ int main( int argc, const char** argv ) {
   
   // close the output file
   out.Close();
-*/
+
   return 0;
 }
 
