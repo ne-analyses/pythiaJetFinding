@@ -168,7 +168,7 @@ int main( int argc, const char** argv ) {
   
   // initialize the pythia generator
   pythia.init();
-  
+  pythia.next();
   // set jet finding parameters
   // --------------------------
   
@@ -279,8 +279,6 @@ int main( int argc, const char** argv ) {
   TH2D* timeCa = new TH2D("clustertimeca", "Time Required to cluster - CA", nRadii, -0.5, nRadii-0.5, 100, -0.5, 99.5);
   TH2D* areaCa = new TH2D("areaca", "Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
   TH2D* areaLeadCa = new TH2D("arealeadca", "Lead Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
-
-  pythia.next();
   
   // set bin labels to radii
   for ( int i = 1; i <= nRadii; ++i ) {
