@@ -131,7 +131,8 @@ int main( int argc, const char** argv ) {
     case 1: {
       exponent = 4;
       outFile = "out/test.root";
-      xmldir = "/Users/nick/physics/software/pythia8/share/Pythia8/xmldoc";
+      //xmldir = "/Users/nick/physics/software/pythia8/share/Pythia8/xmldoc";
+      xmldir = /wsu/home/dx/dx54/dx5412/software/pythia8212/share/Pythia8/xmldoc;
       break;
     }
     case 4: {
@@ -316,10 +317,10 @@ int main( int argc, const char** argv ) {
       // try to generate a new event
       // if it fails, iterate without incrementing
       // current event number
-      std::cout<<"here"<<std::endl;
+      
       if ( !pythia.next() )
         continue;
-      std::cout<<"here"<<std::endl;
+      
       // pythia succeeded, so increment the event
       currentEvent++;
 
