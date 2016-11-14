@@ -197,7 +197,7 @@ int main( int argc, const char** argv ) {
     KtDefs[i] = fastjet::JetDefinition( fastjet::antikt_algorithm, radii[i] );
     CaDefs[i] = fastjet::JetDefinition( fastjet::cambridge_algorithm, radii[i] );
   }
-  
+  std::cout<<"got here"<<std::endl;
   // set up our fastjet environment
   // ------------------------------
   
@@ -213,6 +213,8 @@ int main( int argc, const char** argv ) {
   
   // this will be the two partons from the scattering
   std::vector<fastjet::PseudoJet> partons;
+  
+  std::cout<<"and here"<<std::endl;
   
   // create an area definition for the clustering
   //----------------------------------------------------------
