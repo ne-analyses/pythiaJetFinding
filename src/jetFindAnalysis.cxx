@@ -280,6 +280,8 @@ int main( int argc, const char** argv ) {
   TH2D* areaCa = new TH2D("areaca", "Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
   TH2D* areaLeadCa = new TH2D("arealeadca", "Lead Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
 
+  pythia.next();
+  
   // set bin labels to radii
   for ( int i = 1; i <= nRadii; ++i ) {
 
@@ -311,7 +313,6 @@ int main( int argc, const char** argv ) {
     areaLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
   }
   
-  pythia.next();
   /*
   
   // start the event loop from event 0
