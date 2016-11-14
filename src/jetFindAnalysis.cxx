@@ -328,6 +328,10 @@ int main( int argc, const char** argv ) {
       // pythia succeeded, so increment the event
       currentEvent++;
 
+      // output event number
+      if ( currentEvent%50 == 0 )
+        std::cout<<"Event: "<<currentEvent<<std::endl;
+      
       // convert pythia particles into useable pseudojets,
       // only take those in our eta range && that are visible
       // in conventional detectors
