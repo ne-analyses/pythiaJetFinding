@@ -193,6 +193,7 @@ int main( int argc, const char** argv ) {
   
   for ( int i = 0; i <= nRadii; ++i ) {
     radii[i] = deltaRad * (i+1);
+    std::cout<<"rad: "<<radii[i]<<std::endl;
     antiKtDefs[i] = fastjet::JetDefinition( fastjet::antikt_algorithm, radii[i] );
     KtDefs[i] = fastjet::JetDefinition( fastjet::antikt_algorithm, radii[i] );
     CaDefs[i] = fastjet::JetDefinition( fastjet::cambridge_algorithm, radii[i] );
