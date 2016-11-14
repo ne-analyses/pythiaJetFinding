@@ -171,7 +171,7 @@ int main( int argc, const char** argv ) {
   pythia.next();
   // set jet finding parameters
   // --------------------------
-  
+  std::cout<<"got here"<<std::endl;
   // set a hard cut on rapidity for all tracks
   const double max_track_rap = 10;
   const double max_rap = max_track_rap;
