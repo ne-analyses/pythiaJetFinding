@@ -157,7 +157,7 @@ int main( int argc, const char** argv ) {
   
   // create the pythia generator and initialize it with the xmldoc in my pythia8 directory
   //Pythia8::Pythia pythia( xmldir );
-  Pythia8::Pythia pythia();
+  Pythia8::Pythia pythia;
   
   // settings for LHC pp at 13 TeV
   pythia.readString("Beams:eCM = 13000");
