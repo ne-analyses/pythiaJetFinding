@@ -4,8 +4,7 @@ os = $(shell uname -s)
 INCFLAGS      = -I$(ROOTSYS)/include -I$(FASTJETDIR)/include -I/opt/local/include -I$(PYTHIA8DIR)/include
 
 ifeq ($(os),Linux)
-CXXFLAGS      =
-#-std=c++11
+CXXFLAGS      = -std=c++0x
 else
 CXXFLAGS      = -O -fPIC -pipe -Wall -Wno-deprecated-writable-strings -Wno-unused-variable -Wno-unused-private-field -Wno-gnu-static-float-init -std=c++11
 ## for debugging:
