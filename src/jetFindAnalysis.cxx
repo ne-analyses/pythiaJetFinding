@@ -329,7 +329,7 @@ int main( int argc, const char** argv ) {
       currentEvent++;
 
       // output event number
-      if ( currentEvent%50 == 0 )
+      if ( currentEvent%5 == 0 )
         std::cout<<"Event: "<<currentEvent<<std::endl;
       
       // convert pythia particles into useable pseudojets,
