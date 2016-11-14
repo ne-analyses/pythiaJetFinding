@@ -29,14 +29,14 @@
 // Make use of std::vector,
 // std::string, IO and algorithm
 // STL Headers
-//#include <sstream>
+#include <sstream>
 #include <iostream>
-//#include <fstream>
+#include <fstream>
 #include <cstring>
 #include <string>
-//#include <algorithm>
+#include <algorithm>
 #include <vector>
-//#include <random>
+#include <random>
 #include <time.h>
 #include <limits.h>
 #include <unistd.h>
@@ -168,7 +168,9 @@ int main( int argc, const char** argv ) {
   
   // initialize the pythia generator
   pythia.init();
+  pythia.next()
   
+  /*
   // set jet finding parameters
   // --------------------------
   
@@ -532,7 +534,7 @@ int main( int argc, const char** argv ) {
   
   // close the output file
   out.Close();
-  
+  */
   return 0;
 }
 
