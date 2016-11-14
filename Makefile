@@ -42,7 +42,7 @@ BDIR          = bin
 ###############################################################################
 ################### Remake when these headers are touched #####################
 ###############################################################################
-jetfinder : g++ -std=c++11 src/jetFindAnalysis.cxx /wsu/home/dx/dx54/dx5412/software/pythia8219/lib/libpythia8.a -o src/obj/jetFindAnalysis.o -I/wsu/home/dx/dx54/dx5412/software/pythia8219/include -I/nfs/rhi/STAR/software/root5/include -I/opt/local/include -I/nfs/rhi/STAR/software/fastjet3/include -O2 -ansi  -fPIC -Wl,-rpath,../lib -ldl
+
 
 ###############################################################################
 # standard rules
