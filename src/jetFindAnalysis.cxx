@@ -160,7 +160,7 @@ int main( int argc, const char** argv ) {
   
   // settings for LHC pp at 13 TeV
   pythia.readString("Beams:eCM = 13000");
-  //pythia.readString("HardQCD:all = on");
+  pythia.readString("HardQCD:all = on");
   //pythia.readString("Random:setSeed = on");
   //pythia.readString("Random:seed = 0");
   //pythia.readString("PhaseSpace:pTHatMin = 5.0");
