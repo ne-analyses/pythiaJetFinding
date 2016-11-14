@@ -168,7 +168,7 @@ int main( int argc, const char** argv ) {
   
   // initialize the pythia generator
   pythia.init();
-  pythia.next()
+  pythia.next();
   
   /*
   // set jet finding parameters
