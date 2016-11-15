@@ -262,48 +262,48 @@ int main( int argc, const char** argv ) {
   // make a histogram for all of the differing radii
   
   // antikt
-  TH2D* nJetsAntiKt = new TH2D( "antiktnjets", "Number of Jets - Anti-Kt", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );
+  TH2D* nJetsAntiKt = new TH2D( "antiktnjets", "Number of Jets - Anti-Kt", nRadii, -0.5, nRadii-0.5, 300, -0.5, 599.5 );
   TH2D* deltaEAntiKt = new TH2D( "antiktdeltaE", "#Delta E - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
-  TH2D* deltaRAntiKt = new TH2D( "antiktdeltaR", "#Delta R Leading - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
-  TH2D* nPartAntiKt = new TH2D( "antiktnpart", "Number of Particles per Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 400 );
-  TH2D* nPartLeadAntiKt = new TH2D( "antiktpartlead", "Number of Particles per Leading Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 400 );
-  TH2D* timeAntiKt = new TH2D("antiktclustertime", "Time Required to cluster - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 999.5);
-  TH2D* areaAntiKt = new TH2D("antiktarea", "Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
-  TH2D* areaLeadAntiKt = new TH2D("antiktarealead", "Lead Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
-  TH2D* ptLeadAntiKt = new TH2D("antiktptlead", "Lead Jet Pt - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
-  TH2D* eLeadAntiKt = new TH2D("antiktelead", "Lead Jet Energy - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
+  TH2D* deltaRAntiKt = new TH2D( "antiktdeltaR", "#Delta R Leading - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
+  TH2D* nPartAntiKt = new TH2D( "antiktnpart", "Number of Particles per Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
+  TH2D* nPartLeadAntiKt = new TH2D( "antiktpartlead", "Number of Particles per Leading Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
+  TH2D* timeAntiKt = new TH2D("antiktclustertime", "Time Required to cluster - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 9.5);
+  TH2D* areaAntiKt = new TH2D("antiktarea", "Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
+  TH2D* areaLeadAntiKt = new TH2D("antiktarealead", "Lead Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
+  TH2D* ptLeadAntiKt = new TH2D("antiktptlead", "Lead Jet Pt - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
+  TH2D* eLeadAntiKt = new TH2D("antiktelead", "Lead Jet Energy - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
   TH2D* etaAntiKt = new TH2D("antikteta", "Jet Eta - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap );
   TH2D* etaLeadAntiKt = new TH2D("antiktetalead", "Lead Jet Eta - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap);
   TH2D* phiAntiKt = new TH2D("antiktphi", "Jet Phi - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
   TH2D* phiLeadAntiKt = new TH2D("antiktphilead", "Lead Jet Phi - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
   
   // kt
-  TH2D* nJetsKt = new TH2D( "ktnjets", "Number of Jets - Kt", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );;
+  TH2D* nJetsKt = new TH2D( "ktnjets", "Number of Jets - Kt", nRadii, -0.5, nRadii-0.5, 300, -0.5, 599.5 );;
   TH2D* deltaEKt = new TH2D( "ktdeltaE", "#Delta E - Kt", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
-  TH2D* deltaRKt = new TH2D( "ktdeltaR", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
-  TH2D* nPartKt = new TH2D( "ktnpart", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 400 );
-  TH2D* nPartLeadKt = new TH2D( "ktnpartlead", "Number of Particles per Leading Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 400 );
-  TH2D* timeKt = new TH2D("ktclustertime", "Time Required to cluster - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 999.5);
-  TH2D* areaKt = new TH2D("ktarea", "Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
-  TH2D* areaLeadKt = new TH2D("ktarealead", "Lead Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
-  TH2D* ptLeadKt = new TH2D("ktptlead", "Lead Jet Pt - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
-  TH2D* eLeadKt = new TH2D("ktelead", "Lead Jet Energy - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
+  TH2D* deltaRKt = new TH2D( "ktdeltaR", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
+  TH2D* nPartKt = new TH2D( "ktnpart", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
+  TH2D* nPartLeadKt = new TH2D( "ktnpartlead", "Number of Particles per Leading Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
+  TH2D* timeKt = new TH2D("ktclustertime", "Time Required to cluster - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 9.5);
+  TH2D* areaKt = new TH2D("ktarea", "Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
+  TH2D* areaLeadKt = new TH2D("ktarealead", "Lead Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
+  TH2D* ptLeadKt = new TH2D("ktptlead", "Lead Jet Pt - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
+  TH2D* eLeadKt = new TH2D("ktelead", "Lead Jet Energy - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
   TH2D* etaKt = new TH2D("kteta", "Jet Eta - Kt", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap );
   TH2D* etaLeadKt = new TH2D("ktetalead", "Lead Jet Eta - Kt", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap);
   TH2D* phiKt = new TH2D("ktphi", "Jet Phi - Kt", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
   TH2D* phiLeadKt = new TH2D("ktphilead", "Lead Jet Phi - Kt", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
 
   // cambridge
-  TH2D* nJetsCa = new TH2D( "canjets", "Number of Jets - CA", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );
+  TH2D* nJetsCa = new TH2D( "canjets", "Number of Jets - CA", nRadii, -0.5, nRadii-0.5, 300, -0.5, 599.5 );
   TH2D* deltaECa = new TH2D( "cadeltaE", "#Delta E - CA", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
-  TH2D* deltaRCa = new TH2D( "cadeltaR", "#Delta R Leading - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
-  TH2D* nPartCa = new TH2D( "canpart", "Number of Particles per Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 400 );
-  TH2D* nPartLeadCa = new TH2D( "canpartlead", "Number of Particles per Leading Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 400 );
-  TH2D* timeCa = new TH2D("caclustertime", "Time Required to cluster - CA", nRadii, -0.5, nRadii-0.5, 100, -0.5, 999.5);
-  TH2D* areaCa = new TH2D("caarea", "Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
-  TH2D* areaLeadCa = new TH2D("caarealead", "Lead Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
-  TH2D* ptLeadCa = new TH2D("captlead", "Lead Jet Pt - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
-  TH2D* eLeadCa = new TH2D("caelead", "Lead Jet Energy - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
+  TH2D* deltaRCa = new TH2D( "cadeltaR", "#Delta R Leading - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
+  TH2D* nPartCa = new TH2D( "canpart", "Number of Particles per Jet - CA", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
+  TH2D* nPartLeadCa = new TH2D( "canpartlead", "Number of Particles per Leading Jet - CA", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
+  TH2D* timeCa = new TH2D("caclustertime", "Time Required to cluster - CA", nRadii, -0.5, nRadii-0.5, 100, -0.5, 9.5);
+  TH2D* areaCa = new TH2D("caarea", "Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
+  TH2D* areaLeadCa = new TH2D("caarealead", "Lead Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
+  TH2D* ptLeadCa = new TH2D("captlead", "Lead Jet Pt - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
+  TH2D* eLeadCa = new TH2D("caelead", "Lead Jet Energy - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
   TH2D* etaCa = new TH2D("caeta", "Jet Eta - CA", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap );
   TH2D* etaLeadCa = new TH2D("caetalead", "Lead Jet Eta - CA", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap);
   TH2D* phiCa = new TH2D("caphi", "Jet Phi - CA", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
