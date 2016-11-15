@@ -478,7 +478,7 @@ int main( int argc, const char** argv ) {
           nPartKt->Fill ( radBin.c_str(), KtJets[j].constituents().size(), 1 );
           areaKt->Fill ( radBin.c_str(), KtJets[j].area(), 1 );
           etaKt->Fill( radBin.c_str(), KtJets[j].eta(), 1 );
-          phiKt->Fill( radBin.c_str(), KtJets[j].phi_std(), 1 )
+          phiKt->Fill( radBin.c_str(), KtJets[j].phi_std(), 1 );
         }
         for ( int j = 0; j < CaJets.size(); ++j ) {
           nPartCa->Fill ( radBin.c_str(), CaJets[j].constituents().size(), 1 );
@@ -586,7 +586,7 @@ int main( int argc, const char** argv ) {
   etaKt->Write();
   etaLeadKt->Write();
   phiKt->Write();
-  phiLeadKt->Write():
+  phiLeadKt->Write();
   
   nJetsCa->Write();
   nPartCa->Write();
