@@ -42,6 +42,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <chrono>
+#include <thread>
 
 // The analysis is run on FastJet::PseudoJets
 // We make use of the jetfinding tools
@@ -123,6 +125,8 @@ int convertToPseudoJet( Pythia8::Pythia& p, double max_rap, std::vector<fastjet:
 
 
 int main( int argc, const char** argv ) {
+  
+  typedef std::chrono::high_resolution_clock clock;
   
   // set parameters
   unsigned exponent;
@@ -424,15 +428,15 @@ int main( int argc, const char** argv ) {
         fastjet::ClusterSequenceArea clusterCa( allFinal, CaDefs[i], area_def );
         
         // time the clustering as well
-        clock_t t = clock();
+        std::chrono::time_point<clock> start = clock::now();
         std::vector<fastjet::PseudoJet> antiKtJets = fastjet::sorted_by_pt( clusterAntiKt.inclusive_jets() );
-        clock_t antiKtTime = clock() - t;
-        t = clock();
+        double antiKtTime = std::chrono::duration_cast<std::chrono::milliseconds>(clock::now() - start).count();
+        start = clock::now();
         std::vector<fastjet::PseudoJet> KtJets = fastjet::sorted_by_pt( clusterKt.inclusive_jets() );
-        clock_t ktTime = clock() - t;
-        t = clock();
+        double ktTime = std::chrono::duration_cast<std::chrono::milliseconds>(clock::now() - start).count();
+        start = clock::now();
         std::vector<fastjet::PseudoJet> CaJets = fastjet::sorted_by_pt( clusterCa.inclusive_jets() );
-        clock_t caTime = clock() - t;
+        double caTime = std::chrono::duration_cast<std::chrono::milliseconds>(clock::now() - start).count();
         
         // fill timing measurements
         timeAntiKt->Fill( radBin.c_str(), antiKtTime, 1 );
