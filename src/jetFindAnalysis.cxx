@@ -430,13 +430,13 @@ int main( int argc, const char** argv ) {
         // time the clustering as well
         std::chrono::time_point<clock> start = clock::now();
         std::vector<fastjet::PseudoJet> antiKtJets = fastjet::sorted_by_pt( clusterAntiKt.inclusive_jets() );
-        double antiKtTime = std::chrono::duration_cast<std::chrono::milliseconds>(clock::now() - start).count();
+        double antiKtTime = std::chrono::duration_cast<std::chrono::nanoseconds>(clock::now() - start).count();
         start = clock::now();
         std::vector<fastjet::PseudoJet> KtJets = fastjet::sorted_by_pt( clusterKt.inclusive_jets() );
-        double ktTime = std::chrono::duration_cast<std::chrono::milliseconds>(clock::now() - start).count();
+        double ktTime = std::chrono::duration_cast<std::chrono::nanoseconds>(clock::now() - start).count();
         start = clock::now();
         std::vector<fastjet::PseudoJet> CaJets = fastjet::sorted_by_pt( clusterCa.inclusive_jets() );
-        double caTime = std::chrono::duration_cast<std::chrono::milliseconds>(clock::now() - start).count();
+        double caTime = std::chrono::duration_cast<std::chrono::nanoseconds>(clock::now() - start).count();
         
         // fill timing measurements
         timeAntiKt->Fill( radBin.c_str(), antiKtTime, 1 );
