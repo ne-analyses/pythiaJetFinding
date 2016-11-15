@@ -272,6 +272,10 @@ int main( int argc, const char** argv ) {
   TH2D* areaLeadAntiKt = new TH2D("arealeadantikt", "Lead Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
   TH2D* ptLeadAntiKt = new TH2D("ptleadantikt", "Lead Jet Pt - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
   TH2D* eLeadAntiKt = new TH2D("eleadantikt", "Lead Jet Energy - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
+  TH2D* etaAntiKt = new TH2D("etaantikt", "Jet Eta - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap );
+  TH2D* etaLeadAntiKt = new TH2D("etaleadantikt", "Lead Jet Eta - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap);
+  TH2D* phiAntiKt = new TH2D("phiantikt", "Jet Phi - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
+  TH2D* phiLeadAntiKt = new TH2D("phileadantikt", "Lead Jet Phi - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
   
   // kt
   TH2D* nJetsKt = new TH2D( "njetskt", "Number of Jets - Kt", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );;
@@ -284,7 +288,11 @@ int main( int argc, const char** argv ) {
   TH2D* areaLeadKt = new TH2D("arealeadkt", "Lead Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
   TH2D* ptLeadKt = new TH2D("ptleadkt", "Lead Jet Pt - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
   TH2D* eLeadKt = new TH2D("eleadkt", "Lead Jet Energy - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
-  
+  TH2D* etaKt = new TH2D("etakt", "Jet Eta - Kt", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap );
+  TH2D* etaLeadKt = new TH2D("etaleadkt", "Lead Jet Eta - Kt", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap);
+  TH2D* phiKt = new TH2D("phikt", "Jet Phi - Kt", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
+  TH2D* phiLeadKt = new TH2D("phileadkt", "Lead Jet Phi - Kt", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
+
   // cambridge
   TH2D* nJetsCa = new TH2D( "njetsca", "Number of Jets - CA", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );
   TH2D* deltaECa = new TH2D( "deltaEca", "#Delta E - CA", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
@@ -296,6 +304,10 @@ int main( int argc, const char** argv ) {
   TH2D* areaLeadCa = new TH2D("arealeadca", "Lead Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
   TH2D* ptLeadCa = new TH2D("ptleadca", "Lead Jet Pt - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
   TH2D* eLeadCa = new TH2D("eleadca", "Lead Jet Energy - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
+  TH2D* etaCa = new TH2D("etaca", "Jet Eta - CA", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap );
+  TH2D* etaLeadCa = new TH2D("etaleadca", "Lead Jet Eta - CA", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap);
+  TH2D* phiCa = new TH2D("phica", "Jet Phi - CA", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
+  TH2D* phiLeadCa = new TH2D("phileadca", "Lead Jet Phi - CA", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
   
   // set bin labels to radii
   for ( int i = 1; i <= nRadii; ++i ) {
@@ -350,7 +362,7 @@ int main( int argc, const char** argv ) {
       // only take those in our eta range && that are visible
       // in conventional detectors
       // note: particles user_index() is the charge
-      // if partons are outside 
+      // if partons are outside
       convertToPseudoJet( pythia, max_track_rap, allFinal, chargedFinal, partons );
 
       // event information
@@ -448,17 +460,31 @@ int main( int argc, const char** argv ) {
         ptLeadCa->Fill( radBin.c_str(), CaJets[0].pt(), 1 );
         eLeadCa->Fill( radBin.c_str(), CaJets[0].E(), 1 );
         
+        // leading jet eta & phi
+        etaLeadAntiKt->Fill( radBin.c_str(), antiKtJets[0].eta(), 1 );
+        phiLeadAntiKt->Fill( radBin.c_str(), antiKtJets[0].phi_std(), 1 );
+        etaLeadKt->Fill( radBin.c_str(), KtJets[0].eta(), 1 );
+        phiLeadKt->Fill( radBin.c_str(), KtJets[0].phi_std(), 1 );
+        etaLeadCa->Fill( radBin.c_str(), CaJets[0].eta(), 1 );
+        phiLeadCa->Fill( radBin.c_str(), CaJets[0].phi_std(), 1 );
+        
         for ( int j = 0; j < antiKtJets.size(); ++j ) {
           nPartAntiKt->Fill ( radBin.c_str(), antiKtJets[j].constituents().size(), 1 );
           areaAntiKt->Fill ( radBin.c_str(), antiKtJets[j].area(), 1 );
+          etaAntiKt->Fill( radBin.c_str(), antiKtJets[j].eta(), 1 );
+          phiAntiKt->Fill( radBin.c_str(), antiKtJets[j].phi_std(), 1 );
         }
         for ( int j = 0; j < KtJets.size(); ++j ) {
           nPartKt->Fill ( radBin.c_str(), KtJets[j].constituents().size(), 1 );
           areaKt->Fill ( radBin.c_str(), KtJets[j].area(), 1 );
+          etaKt->Fill( radBin.c_str(), KtJets[j].eta(), 1 );
+          phiKt->Fill( radBin.c_str(), KtJets[j].phi_std(), 1 )
         }
         for ( int j = 0; j < CaJets.size(); ++j ) {
           nPartCa->Fill ( radBin.c_str(), CaJets[j].constituents().size(), 1 );
           areaCa->Fill ( radBin.c_str(), CaJets[j].area(), 1 );
+          etaCa->Fill( radBin.c_str(), CaJets[j].eta(), 1 );
+          phiCa->Fill( radBin.c_str(), CaJets[j].phi_std(), 1 );
         }
         
         // and compare to the initial partons for delta E and delta R
@@ -542,6 +568,10 @@ int main( int argc, const char** argv ) {
   areaLeadAntiKt->Write();
   ptLeadAntiKt->Write();
   eLeadAntiKt->Write();
+  etaAntiKt->Write();
+  etaLeadAntiKt->Write();
+  phiAntiKt->Write();
+  phiLeadAntiKt->Write();
   
   nJetsKt->Write();
   nPartKt->Write();
@@ -553,6 +583,10 @@ int main( int argc, const char** argv ) {
   areaLeadKt->Write();
   ptLeadKt->Write();
   eLeadKt->Write();
+  etaKt->Write();
+  etaLeadKt->Write();
+  phiKt->Write();
+  phiLeadKt->Write():
   
   nJetsCa->Write();
   nPartCa->Write();
@@ -564,7 +598,10 @@ int main( int argc, const char** argv ) {
   areaLeadCa->Write();
   ptLeadCa->Write();
   eLeadCa->Write();
-  
+  etaCa->Write();
+  etaLeadCa->Write();
+  phiCa->Write();
+  phiLeadCa->Write();
   
   // close the output file
   out.Close();
