@@ -164,7 +164,7 @@ int main( int argc, const char** argv ) {
   pythia.readString("HardQCD:all = on");
   pythia.readString("Random:setSeed = on");
   pythia.readString("Random:seed = 0");
-  pythia.readString("PhaseSpace:pTHatMin = 10.0");
+  pythia.readString("PhaseSpace:pTHatMin = 200.0");
   
   // initialize the pythia generator
   pythia.init();
@@ -255,33 +255,45 @@ int main( int argc, const char** argv ) {
   TH1D* nJetsKtBaseCharged = new TH1D("njetsktbasecharged", "Jet Multiplicity Kt Base Charged", 50, 49.5, 299.5);
   TH1D* nJetsCaBaseCharged = new TH1D("njetsCabasecharged", "Jet Multiplicity CA Base Charged", 50, 49.5, 299.5);
   
+  
+  
   // make a histogram for all of the differing radii
+  
+  // antikt
   TH2D* nJetsAntiKt = new TH2D( "njetsantikt", "Number of Jets - Anti-Kt", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );
   TH2D* deltaEAntiKt = new TH2D( "deltaEantikt", "#Delta E - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
   TH2D* deltaRAntiKt = new TH2D( "deltaRantikt", "#Delta R Leading - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
   TH2D* nPartAntiKt = new TH2D( "npartantikt", "Number of Particles per Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* nPartLeadAntiKt = new TH2D( "npartleadantikt", "Number of Particles per Leading Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
-  TH2D* timeAntiKt = new TH2D("clustertimeantikt", "Time Required to cluster - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 99.5);
+  TH2D* timeAntiKt = new TH2D("clustertimeantikt", "Time Required to cluster - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 999.5);
   TH2D* areaAntiKt = new TH2D("areaantikt", "Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
   TH2D* areaLeadAntiKt = new TH2D("arealeadantikt", "Lead Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
+  TH2D* ptLeadAntiKt = new TH2D("ptleadantikt", "Lead Jet Pt - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
+  TH2D* eLeadAntiKt = new TH2D("eleadantikt", "Lead Jet Energy - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
   
+  // kt
   TH2D* nJetsKt = new TH2D( "njetskt", "Number of Jets - Kt", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );;
   TH2D* deltaEKt = new TH2D( "deltaEkt", "#Delta E - Kt", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
   TH2D* deltaRKt = new TH2D( "deltaRkt", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
   TH2D* nPartKt = new TH2D( "npartkt", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* nPartLeadKt = new TH2D( "npartleadKt", "Number of Particles per Leading Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
-  TH2D* timeKt = new TH2D("clustertimekt", "Time Required to cluster - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 99.5);
+  TH2D* timeKt = new TH2D("clustertimekt", "Time Required to cluster - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 999.5);
   TH2D* areaKt = new TH2D("areakt", "Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
   TH2D* areaLeadKt = new TH2D("arealeadkt", "Lead Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
+  TH2D* ptLeadKt = new TH2D("ptleadkt", "Lead Jet Pt - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
+  TH2D* eLeadKt = new TH2D("eleadkt", "Lead Jet Energy - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
   
+  // cambridge
   TH2D* nJetsCa = new TH2D( "njetsca", "Number of Jets - CA", nRadii, -0.5, nRadii-0.5, 200, -0.5, 399.5 );
   TH2D* deltaECa = new TH2D( "deltaEca", "#Delta E - CA", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
   TH2D* deltaRCa = new TH2D( "deltaRca", "#Delta R Leading - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 1.0 );
   TH2D* nPartCa = new TH2D( "npartca", "Number of Particles per Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
   TH2D* nPartLeadCa = new TH2D( "npartleadca", "Number of Particles per Leading Jet - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 100 );
-  TH2D* timeCa = new TH2D("clustertimeca", "Time Required to cluster - CA", nRadii, -0.5, nRadii-0.5, 100, -0.5, 99.5);
+  TH2D* timeCa = new TH2D("clustertimeca", "Time Required to cluster - CA", nRadii, -0.5, nRadii-0.5, 100, -0.5, 999.5);
   TH2D* areaCa = new TH2D("areaca", "Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
   TH2D* areaLeadCa = new TH2D("arealeadca", "Lead Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, TMath::Pi() );
+  TH2D* ptLeadCa = new TH2D("ptleadca", "Lead Jet Pt - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
+  TH2D* eLeadCa = new TH2D("eleadca", "Lead Jet Energy - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 300 );
   
   // set bin labels to radii
   for ( int i = 1; i <= nRadii; ++i ) {
@@ -425,6 +437,14 @@ int main( int argc, const char** argv ) {
         areaLeadKt->Fill ( radBin.c_str(), KtJets[0].area(), 1 );
         areaLeadCa->Fill ( radBin.c_str(), CaJets[0].area(), 1 );
         
+        // fill leading jet spectra
+        ptLeadAntiKt->Fill( radBin.c_str(), antiKtJets[0].pt() );
+        eLeadAntiKt->Fill( radBin.c_str(), antiKtJets[0].E() );
+        ptLeadKt->Fill( radBin.c_str(), KtJets[0].pt() );
+        eLeadKt->Fill( radBin.c_str(), KtJets[0].E() );
+        ptLeadCa->Fill( radBin.c_str(), CaJets[0].pt() );
+        eLeadCa->Fill( radBin.c_str(), CaJets[0].E() );
+        
         for ( int j = 0; j < antiKtJets.size(); ++j ) {
           nPartAntiKt->Fill ( radBin.c_str(), antiKtJets[j].constituents().size(), 1 );
           areaAntiKt->Fill ( radBin.c_str(), antiKtJets[j].area(), 1 );
@@ -517,6 +537,8 @@ int main( int argc, const char** argv ) {
   timeAntiKt->Write();
   areaAntiKt->Write();
   areaLeadAntiKt->Write();
+  ptLeadAntiKt->Write();
+  eLeadAntiKt->Write();
   
   nJetsKt->Write();
   nPartKt->Write();
@@ -526,6 +548,8 @@ int main( int argc, const char** argv ) {
   timeKt->Write();
   areaKt->Write();
   areaLeadKt->Write();
+  ptLeadKt->Write();
+  eleadkt->Write();
   
   nJetsCa->Write();
   nPartCa->Write();
@@ -535,6 +559,8 @@ int main( int argc, const char** argv ) {
   timeCa->Write();
   areaCa->Write();
   areaLeadCa->Write();
+  ptLeadCa->Write();
+  eLeadCa->Write();
   
   
   // close the output file
