@@ -549,7 +549,7 @@ int main( int argc, const char** argv ) {
   areaKt->Write();
   areaLeadKt->Write();
   ptLeadKt->Write();
-  eleadkt->Write();
+  eLeadKt->Write();
   
   nJetsCa->Write();
   nPartCa->Write();
