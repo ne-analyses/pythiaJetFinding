@@ -73,7 +73,7 @@ namespace patch {
 }
 
 // used to convert pythia events to vectors of pseudojets
-void convertToPseudoJet( Pythia8::Pythia& p, double max_rap, std::vector<fastjet::PseudoJet>& all, std::vector<fastjet::PseudoJet>& charged, std::vector<fastjet::PseudoJet>& part ) {
+int convertToPseudoJet( Pythia8::Pythia& p, double max_rap, std::vector<fastjet::PseudoJet>& all, std::vector<fastjet::PseudoJet>& charged, std::vector<fastjet::PseudoJet>& part ) {
   
   // clear the event containers
   all.clear();
@@ -91,6 +91,8 @@ void convertToPseudoJet( Pythia8::Pythia& p, double max_rap, std::vector<fastjet
   part1.set_user_index( 3 * p.event[5].charge() );
   fastjet::PseudoJet part2( p.event[6].px(), p.event[6].py(), p.event[6].pz(), p.event[6].e() );
   part2.set_user_index( 3 * p.event[6].charge() );
+  if ( fabs(part1.eta()) > max_rap || fabs(part2.eta()) >max_rap )
+    return 0;
   part.push_back( part1 );
   part.push_back( part2 );
   
@@ -108,10 +110,10 @@ void convertToPseudoJet( Pythia8::Pythia& p, double max_rap, std::vector<fastjet
       if ( p.event[i].charge() )
         charged.push_back( tmp );
       
-      
     }
   }
   
+  return 1;
 }
 
 // Arguments
@@ -173,7 +175,7 @@ int main( int argc, const char** argv ) {
   // --------------------------
 
   // set a hard cut on rapidity for all tracks
-  const double max_track_rap = 10;
+  const double max_track_rap = 4.0;
   const double max_rap = max_track_rap;
   
   // first some base jetfinding definitions
@@ -237,12 +239,12 @@ int main( int argc, const char** argv ) {
   TH1D* chargedMultiplicity = new TH1D("chargemult", "Charged Multiplicity", 300, -0.5, 899.5 );
   TH1D* partonPt = new TH1D("partonpt", "Parton Pt", 100, 0, 1000 );
   TH1D* partonE = new TH1D( "parton_e", "Parton Energy", 100, 0, 1000 );
-  TH2D* partonEtaPhi = new TH2D("partonetaphi", "Parton Eta x Phi", 100, -12, 12, 100, -TMath::Pi(), TMath::Pi() );
+  TH2D* partonEtaPhi = new TH2D("partonetaphi", "Parton Eta x Phi", 100, -5, 5, 100, -TMath::Pi(), TMath::Pi() );
   
   // associated particle information
   TH1D* visiblePt = new TH1D( "finalstatept", "Detected Pt", 200, 0, 100 );
   TH1D* visibleE = new TH1D( "finalstateE", "Detected E", 200, 0, 100 );
-  TH2D* visibleEtaPhi = new TH2D( "finaletaphi", "Detected Eta x Phi",  100, -12, 12, 100, -TMath::Pi(), TMath::Pi() );
+  TH2D* visibleEtaPhi = new TH2D( "finaletaphi", "Detected Eta x Phi",  100, -5, 5, 100, -TMath::Pi(), TMath::Pi() );
   TH1D* chargedPt = new TH1D("chargedfstatept", "Detected Charged Pt", 200, 0, 100);
   TH1D* chargedE = new TH1D( "chargedfstateE", "Detected Charged E", 200, 0, 100 );
   TH2D* chargedEtaPhi = new TH2D( "chargedetaphi", "Detected Charged Eta x Phi",  100, -12, 12, 100, -TMath::Pi(), TMath::Pi() );
@@ -348,6 +350,7 @@ int main( int argc, const char** argv ) {
       // only take those in our eta range && that are visible
       // in conventional detectors
       // note: particles user_index() is the charge
+      // if partons are outside 
       convertToPseudoJet( pythia, max_track_rap, allFinal, chargedFinal, partons );
 
       // event information
