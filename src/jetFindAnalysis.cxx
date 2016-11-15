@@ -422,26 +422,28 @@ int main( int argc, const char** argv ) {
         
         // first perform the clustering
         
-        
-        fastjet::ClusterSequenceArea clusterAntiKt( allFinal, antiKtDefs[i], area_def );
-        fastjet::ClusterSequenceArea clusterKt( allFinal, KtDefs[i], area_def );
-        fastjet::ClusterSequenceArea clusterCa( allFinal, CaDefs[i], area_def );
-        
         // time the clustering as well
         std::chrono::time_point<clock> start = clock::now();
-        std::vector<fastjet::PseudoJet> antiKtJets = fastjet::sorted_by_pt( clusterAntiKt.inclusive_jets() );
+        
+        fastjet::ClusterSequenceArea clusterAntiKt( allFinal, antiKtDefs[i], area_def );
         double antiKtTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
         start = clock::now();
-        std::vector<fastjet::PseudoJet> KtJets = fastjet::sorted_by_pt( clusterKt.inclusive_jets() );
+        
+        fastjet::ClusterSequenceArea clusterKt( allFinal, KtDefs[i], area_def );
         double ktTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
         start = clock::now();
-        std::vector<fastjet::PseudoJet> CaJets = fastjet::sorted_by_pt( clusterCa.inclusive_jets() );
+        
+        fastjet::ClusterSequenceArea clusterCa( allFinal, CaDefs[i], area_def );
         double caTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
         
         // fill timing measurements
         timeAntiKt->Fill( radBin.c_str(), antiKtTime, 1 );
         timeKt->Fill( radBin.c_str(), ktTime, 1 );
         timeCa->Fill( radBin.c_str(), caTime, 1 );
+        
+        std::vector<fastjet::PseudoJet> antiKtJets = fastjet::sorted_by_pt( clusterAntiKt.inclusive_jets() );
+        std::vector<fastjet::PseudoJet> KtJets = fastjet::sorted_by_pt( clusterKt.inclusive_jets() );
+        std::vector<fastjet::PseudoJet> CaJets = fastjet::sorted_by_pt( clusterCa.inclusive_jets() );
         
         // now start to fill histograms
         // first, number of jets in the event
