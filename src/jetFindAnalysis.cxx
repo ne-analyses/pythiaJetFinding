@@ -438,12 +438,12 @@ int main( int argc, const char** argv ) {
         areaLeadCa->Fill ( radBin.c_str(), CaJets[0].area(), 1 );
         
         // fill leading jet spectra
-        ptLeadAntiKt->Fill( radBin.c_str(), antiKtJets[0].pt() );
-        eLeadAntiKt->Fill( radBin.c_str(), antiKtJets[0].E() );
-        ptLeadKt->Fill( radBin.c_str(), KtJets[0].pt() );
-        eLeadKt->Fill( radBin.c_str(), KtJets[0].E() );
-        ptLeadCa->Fill( radBin.c_str(), CaJets[0].pt() );
-        eLeadCa->Fill( radBin.c_str(), CaJets[0].E() );
+        ptLeadAntiKt->Fill( radBin.c_str(), antiKtJets[0].pt(), 1 );
+        eLeadAntiKt->Fill( radBin.c_str(), antiKtJets[0].E(), 1 );
+        ptLeadKt->Fill( radBin.c_str(), KtJets[0].pt(), 1 );
+        eLeadKt->Fill( radBin.c_str(), KtJets[0].E(), 1 );
+        ptLeadCa->Fill( radBin.c_str(), CaJets[0].pt(), 1 );
+        eLeadCa->Fill( radBin.c_str(), CaJets[0].E(), 1 );
         
         for ( int j = 0; j < antiKtJets.size(); ++j ) {
           nPartAntiKt->Fill ( radBin.c_str(), antiKtJets[j].constituents().size(), 1 );
