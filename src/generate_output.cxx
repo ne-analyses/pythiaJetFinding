@@ -79,11 +79,11 @@ int main ( int argc, const char** argv ) {
   // give the histogram name
   
   // first, jetfinder names
-  unsigned nJetFinders = 3;
+  const unsigned nJetFinders = 3;
   std::string jfNames[nJetFinders] = { "antikt", "kt", "ca" };
   
   // now, the histogram names
-  unsigned nHistograms = 14;
+  const unsigned nHistograms = 14;
   std::string histNames[nHistograms] = { "njets", "deltaE", "deltaR", "npart", "partlead",
     "clustertime", "area", "arealead", "ptlead", "elead", "eta", "phi", "etalead", "philead" };
   
