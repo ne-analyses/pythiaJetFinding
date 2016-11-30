@@ -87,6 +87,10 @@ int main ( int argc, const char** argv ) {
   std::string histNames[nHistograms] = { "njets", "deltaE", "deltaR", "npart", "npartlead",
     "clustertime", "area", "arealead", "ptlead", "elead", "eta", "phi", "etalead", "philead" };
   
+  // and the relevant jetfinding radii
+  const unsigned nRadii = 10;
+  std::string radii[nRadii] = { "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0" };
+  
   // store the histograms in arrays of TH2Ds
   TH2D* histograms[nJetFinders][nHistograms];
   
@@ -97,11 +101,21 @@ int main ( int argc, const char** argv ) {
     }
   }
   
+  // Now convert 2D histograms into 1D histograms
+  TH1D* hist1D[nJetFinders][nHistograms][nRadii];
+
+  
   for ( int i = 0; i < nJetFinders; ++i ) {
     for ( int j = 0; j < nHistograms; ++j ) {
-      std::cout<<histograms[i][j]<<std::endl;
+      for ( int k = 0; k < nRadii; ++k ) {
+        
+        histograms[i][j]->GetXaxis()->SetRange( (k+1),(k+1) );
+        hist1D[i][j][k] = (TH1D*) histograms->ProjectionY();
+        
+      }
     }
   }
+  
   
   return 0;
 }
