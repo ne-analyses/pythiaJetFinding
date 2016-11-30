@@ -93,7 +93,7 @@ int main ( int argc, const char** argv ) {
   // load histograms from file
   for ( int i = 0; i < nHistograms; ++i ) {
     for ( int j = 0; j < nJetFinders; ++j ) {
-      histograms[i] = (TH2D*) rootFile.Get( (jfNames[j]+histNames[i]).c_str() );
+      histograms[j][i] = (TH2D*) rootFile.Get( (jfNames[j]+histNames[i]).c_str() );
     }
   }
   
