@@ -84,7 +84,7 @@ int main ( int argc, const char** argv ) {
   
   // now, the histogram names
   const unsigned nHistograms = 14;
-  std::string histNames[nHistograms] = { "njets", "deltaE", "deltaR", "npart", "partlead",
+  std::string histNames[nHistograms] = { "njets", "deltaE", "deltaR", "npart", "npartlead",
     "clustertime", "area", "arealead", "ptlead", "elead", "eta", "phi", "etalead", "philead" };
   
   // store the histograms in arrays of TH2Ds
