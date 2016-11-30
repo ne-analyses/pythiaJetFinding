@@ -70,7 +70,7 @@ int main ( int argc, const char** argv ) {
   }
 
   // load the root file where the histograms are stored
-  TFile rootFile( inFile, "READ" );
+  TFile rootFile( inFile.c_str(), "READ" );
   
   // Current histograms
   // ------------------
