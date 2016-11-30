@@ -110,7 +110,7 @@ int main ( int argc, const char** argv ) {
       for ( int k = 0; k < nRadii; ++k ) {
         
         histograms[i][j]->GetXaxis()->SetRange( (k+1),(k+1) );
-        hist1D[i][j][k] = (TH1D*) histograms->ProjectionY();
+        hist1D[i][j][k] = (TH1D*) histograms[i][j]->ProjectionY();
         
       }
     }
