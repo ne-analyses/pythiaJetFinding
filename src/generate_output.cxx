@@ -69,10 +69,35 @@ int main ( int argc, const char** argv ) {
     }
   }
 
-  std::cout<<"got infile"<<inFile<<std::endl;
+  // load the root file where the histograms are stored
+  TFile rootFile( inFile, "READ" );
   
+  // Current histograms
+  // ------------------
   
+  // jetfinder names will be combined with what is plotted to
+  // give the histogram name
   
+  // first, jetfinder names
+  unsigned nJetFinders = 3;
+  std::string jfNames[nJetFinders] = { "antikt", "kt", "ca" };
+  
+  // now, the histogram names
+  unsigned nHistograms = 14;
+  std::string histNames[nHistograms] = { "njets", "deltaE", "deltaR", "npart", "partlead",
+    "clustertime", "area", "arealead", "ptlead", "elead", "eta", "phi", "etalead", "philead" };
+  
+  // store the histograms in arrays of TH2Ds
+  TH2D* histograms[nJetFinders][nHistograms];
+  
+  // load histograms from file
+  for ( int i = 0; i < nHistograms; ++i ) {
+    for ( int j = 0; j < nJetFinders; ++j ) {
+      histograms[i] = (TH2D*) rootFile.Get( (jfNames[j]+histNames[i]).c_str() );
+    }
+  }
+  
+  return 0;
 }
 
 
