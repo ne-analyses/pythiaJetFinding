@@ -61,14 +61,16 @@ $(BDIR)/%  : $(ODIR)/%.o
 ###############################################################################
 ############################# Main Targets ####################################
 ###############################################################################
-all : $(BDIR)/jetFindAnalysis
+all : $(BDIR)/jetFindAnalysis $(BDIR)/generate_output
 
 #$(ODIR)/qa_v1.o 		: $(SDIR)/qa_v1.cxx
 $(ODIR)/jetFindAnalysis.o      : $(SDIR)/jetFindAnalysis.cxx
+$(ODIR)/generate_output.o      : $(SDIR)/generate_output.cxx
 
 #data analysis
 #$(BDIR)/qa_v1		: $(ODIR)/qa_v1.o
 $(BDIR)/jetFindAnalysis     : $(ODIR)/jetFindAnalysis.o
+$(BDIR)/generate_output     : $(ODIR)/generate_output.o
 
 ###############################################################################
 ##################################### MISC ####################################
