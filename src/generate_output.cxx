@@ -98,7 +98,7 @@ int main ( int argc, const char** argv ) {
   }
   
   for ( int i = 0; i < nJetFinders; ++i ) {
-    for ( int j = 0); j < nHistograms; ++j ) {
+    for ( int j = 0; j < nHistograms; ++j ) {
       std::cout<<histograms[i][j]<<std::endl;
     }
   }
