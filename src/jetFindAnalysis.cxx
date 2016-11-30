@@ -270,7 +270,7 @@ int main( int argc, const char** argv ) {
   TH2D* deltaEAntiKt = new TH2D( "antiktdeltaE", "#Delta E - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
   TH2D* deltaRAntiKt = new TH2D( "antiktdeltaR", "#Delta R Leading - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
   TH2D* nPartAntiKt = new TH2D( "antiktnpart", "Number of Particles per Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
-  TH2D* nPartLeadAntiKt = new TH2D( "antiktpartlead", "Number of Particles per Leading Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
+  TH2D* nPartLeadAntiKt = new TH2D( "antiktnpartlead", "Number of Particles per Leading Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
   TH2D* timeAntiKt = new TH2D("antiktclustertime", "Time Required to cluster - Anti-Kt", nRadii, -0.5, nRadii-0.5, 500, -0.5, 19999.5);
   TH2D* areaAntiKt = new TH2D("antiktarea", "Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
   TH2D* areaLeadAntiKt = new TH2D("antiktarealead", "Lead Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
