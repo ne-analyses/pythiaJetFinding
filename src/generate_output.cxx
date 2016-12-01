@@ -111,6 +111,8 @@ int main ( int argc, const char** argv ) {
         
         histograms[i][j]->GetXaxis()->SetRange( (k+1),(k+1) );
         hist1D[i][j][k] = (TH1D*) histograms[i][j]->ProjectionY();
+        std::string name = jfNames[i] + histNames[j] + radii[k];
+        hist1D[i][j][k]->SetName( name.c_str() );
         
       }
     }
