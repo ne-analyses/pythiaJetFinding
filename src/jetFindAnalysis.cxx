@@ -266,7 +266,7 @@ int main( int argc, const char** argv ) {
   // make a histogram for all of the differing radii
   
   // antikt
-  TH2D* nJetsAntiKt = new TH2D( "antiktnjets", "Number of Jets - Anti-Kt", nRadii, -0.5, nRadii-0.5, 3000, -0.5, 1199.5 );
+  TH2D* nJetsAntiKt = new TH2D( "antiktnjets", "Number of Jets - Anti-Kt", nRadii, -0.5, nRadii-0.5, 300, -0.5, 599.5 );
   TH2D* deltaEAntiKt = new TH2D( "antiktdeltaE", "#Delta E - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
   TH2D* deltaRAntiKt = new TH2D( "antiktdeltaR", "#Delta R Leading - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
   TH2D* nPartAntiKt = new TH2D( "antiktnpart", "Number of Particles per Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
@@ -282,7 +282,7 @@ int main( int argc, const char** argv ) {
   TH2D* phiLeadAntiKt = new TH2D("antiktphilead", "Lead Jet Phi - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
   
   // kt
-  TH2D* nJetsKt = new TH2D( "ktnjets", "Number of Jets - Kt", nRadii, -0.5, nRadii-0.5, 300, -0.5, 1199.5 );;
+  TH2D* nJetsKt = new TH2D( "ktnjets", "Number of Jets - Kt", nRadii, -0.5, nRadii-0.5, 300, -0.5, 599.5 );;
   TH2D* deltaEKt = new TH2D( "ktdeltaE", "#Delta E - Kt", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
   TH2D* deltaRKt = new TH2D( "ktdeltaR", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
   TH2D* nPartKt = new TH2D( "ktnpart", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
@@ -298,7 +298,7 @@ int main( int argc, const char** argv ) {
   TH2D* phiLeadKt = new TH2D("ktphilead", "Lead Jet Phi - Kt", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
 
   // cambridge
-  TH2D* nJetsCa = new TH2D( "canjets", "Number of Jets - CA", nRadii, -0.5, nRadii-0.5, 300, -0.5, 1199.5 );
+  TH2D* nJetsCa = new TH2D( "canjets", "Number of Jets - CA", nRadii, -0.5, nRadii-0.5, 300, -0.5, 599.5 );
   TH2D* deltaECa = new TH2D( "cadeltaE", "#Delta E - CA", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
   TH2D* deltaRCa = new TH2D( "cadeltaR", "#Delta R Leading - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
   TH2D* nPartCa = new TH2D( "canpart", "Number of Particles per Jet - CA", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
