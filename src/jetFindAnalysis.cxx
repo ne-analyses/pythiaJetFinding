@@ -425,15 +425,18 @@ int main( int argc, const char** argv ) {
         // time the clustering as well
         std::chrono::time_point<clock> start = clock::now();
         
-        fastjet::ClusterSequenceArea clusterAntiKt( allFinal, antiKtDefs[i], area_def );
+        //fastjet::ClusterSequenceArea clusterAntiKt( allFinal, antiKtDefs[i], area_def );
+        fastjet::ClusterSequence clusterAntiKt( allFinal, antiKtDefs[i] );
         double antiKtTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
         start = clock::now();
         
-        fastjet::ClusterSequenceArea clusterKt( allFinal, KtDefs[i], area_def );
+        //fastjet::ClusterSequenceArea clusterKt( allFinal, KtDefs[i], area_def );
+        fastjet::ClusterSequence clusterKt( allFinal, KtDefs[i] );
         double ktTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
         start = clock::now();
         
-        fastjet::ClusterSequenceArea clusterCa( allFinal, CaDefs[i], area_def );
+        //fastjet::ClusterSequenceArea clusterCa( allFinal, CaDefs[i], area_def );
+        fastjet::ClusterSequence clusterCa( allFinal, CaDefs[i] );
         double caTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
         
         // fill timing measurements
