@@ -425,18 +425,18 @@ int main( int argc, const char** argv ) {
         // time the clustering as well
         std::chrono::time_point<clock> start = clock::now();
         
-        //fastjet::ClusterSequenceArea clusterAntiKt( allFinal, antiKtDefs[i], area_def );
-        fastjet::ClusterSequence clusterAntiKt( allFinal, antiKtDefs[i] );
+        fastjet::ClusterSequenceArea clusterAntiKt( allFinal, antiKtDefs[i], area_def );
+        //fastjet::ClusterSequence clusterAntiKt( allFinal, antiKtDefs[i] );
         double antiKtTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
         start = clock::now();
         
-        //fastjet::ClusterSequenceArea clusterKt( allFinal, KtDefs[i], area_def );
-        fastjet::ClusterSequence clusterKt( allFinal, KtDefs[i] );
+        fastjet::ClusterSequenceArea clusterKt( allFinal, KtDefs[i], area_def );
+        //fastjet::ClusterSequence clusterKt( allFinal, KtDefs[i] );
         double ktTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
         start = clock::now();
         
-        //fastjet::ClusterSequenceArea clusterCa( allFinal, CaDefs[i], area_def );
-        fastjet::ClusterSequence clusterCa( allFinal, CaDefs[i] );
+        fastjet::ClusterSequenceArea clusterCa( allFinal, CaDefs[i], area_def );
+        //fastjet::ClusterSequence clusterCa( allFinal, CaDefs[i] );
         double caTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
         
         // fill timing measurements
@@ -444,9 +444,9 @@ int main( int argc, const char** argv ) {
         timeKt->Fill( radBin.c_str(), ktTime, 1 );
         timeCa->Fill( radBin.c_str(), caTime, 1 );
         
-        std::vector<fastjet::PseudoJet> antiKtJets = fastjet::sorted_by_pt( clusterAntiKt.inclusive_jets() );
-        std::vector<fastjet::PseudoJet> KtJets = fastjet::sorted_by_pt( clusterKt.inclusive_jets() );
-        std::vector<fastjet::PseudoJet> CaJets = fastjet::sorted_by_pt( clusterCa.inclusive_jets() );
+        std::vector<fastjet::PseudoJet> antiKtJets = fastjet::sorted_by_pt( fastjet::SelectorPtMin(0.2)(clusterAntiKt.inclusive_jets()) );
+        std::vector<fastjet::PseudoJet> KtJets = fastjet::sorted_by_pt( fastjet::SelectorPtMin(0.2)(clusterKt.inclusive_jets()) );
+        std::vector<fastjet::PseudoJet> CaJets = fastjet::sorted_by_pt( fastjet::SelectorPtMin(0.2)(clusterCa.inclusive_jets()) );
         
         // now start to fill histograms
         // first, number of jets in the event
