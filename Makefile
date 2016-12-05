@@ -29,7 +29,7 @@ endif
 
 ROOTLIBS      = $(shell root-config --libs)
 
-LIBPATH       = $(ROOTLIBS) -L$(FASTJETDIR)/lib -L$(PYTHIA8DIR)/lib
+LIBPATH       = -L$(FASTJETDIR)/lib -L$(PYTHIA8DIR)/lib $(ROOTLIBS)
 LIBS          = -lfastjet -lfastjettools -lpythia8
 
 
@@ -54,7 +54,7 @@ $(ODIR)/%.o : $(SDIR)/%.cxx $(INCS)
 $(BDIR)/%  : $(ODIR)/%.o 
 	@echo 
 	@echo LINKING
-	$(CXX) $(LDFLAGS) $(LIBPATH) $(LIBS) $^ -o $@
+	$(CXX) $(LDFLAGS) $^ -o $@ $(LIBPATH) $(LIBS)
 
 ###############################################################################
 
