@@ -198,7 +198,7 @@ int main( int argc, const char** argv ) {
   fastjet::JetDefinition antiKtDefs[nRadii];
   fastjet::JetDefinition KtDefs[nRadii];
   fastjet::JetDefinition CaDefs[nRadii];
-  fastjet::JetDefinition SISCone[nRadii];
+  fastjet::JetDefinition SISDefs[nRadii];
   
   for ( int i = 0; i < nRadii; ++i ) {
     radii[i] = deltaRad * (i+1);
@@ -209,7 +209,7 @@ int main( int argc, const char** argv ) {
 
     // and for SISCone
     fastjet::JetDefinition::Plugin * plugin = new fastjet::SISConePlugin(radii[i], overlap_threshold);
-    SISCone[i] = fastjet::JetDefinition(plugin);
+    SISDefs[i] = fastjet::JetDefinition(plugin);
   }
 
   // set up our fastjet environment
@@ -320,6 +320,21 @@ int main( int argc, const char** argv ) {
   TH2D* phiCa = new TH2D("caphi", "Jet Phi - CA", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
   TH2D* phiLeadCa = new TH2D("caphilead", "Lead Jet Phi - CA", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
   
+  // siscone
+  TH2D* nJetsSIS = new TH2D( "sisnjets", "Number of Jets - Kt", nRadii, -0.5, nRadii-0.5, 300, -0.5, 599.5 );;
+  TH2D* deltaESIS = new TH2D( "sisdeltaE", "#Delta E - Kt", nRadii, -0.5, nRadii-0.5, 100, -100, 100 );
+  TH2D* deltaRSIS = new TH2D( "sisdeltaR", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
+  TH2D* nPartSIS = new TH2D( "sisnpart", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
+  TH2D* nPartLeadSIS = new TH2D( "sisnpartlead", "Number of Particles per Leading Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
+  TH2D* timeSIS = new TH2D("sisclustertime", "Time Required to cluster - Kt", nRadii, -0.5, nRadii-0.5, 500, -0.5, 19999.5);
+  TH2D* areaSIS = new TH2D("sisarea", "Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
+  TH2D* areaLeadSIS = new TH2D("sisarealead", "Lead Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
+  TH2D* ptLeadSIS = new TH2D("sisptlead", "Lead Jet Pt - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
+  TH2D* eLeadSIS = new TH2D("siselead", "Lead Jet Energy - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
+  TH2D* etaSIS = new TH2D("siseta", "Jet Eta - Kt", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap );
+  TH2D* etaLeadSIS = new TH2D("sisetalead", "Lead Jet Eta - Kt", nRadii, -0.5, nRadii-0.5, 100, -max_rap, max_rap);
+  TH2D* phiSIS = new TH2D("sisphi", "Jet Phi - Kt", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
+  TH2D* phiLeadSIS = new TH2D("sisphilead", "Lead Jet Phi - Kt", nRadii, -0.5, nRadii-0.5, 100, -TMath::Pi(), TMath::Pi() );
   // set bin labels to radii
   for ( int i = 1; i <= nRadii; ++i ) {
 
@@ -331,7 +346,13 @@ int main( int argc, const char** argv ) {
     timeAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
     areaAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
     areaLeadAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
-    
+    ptLeadAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    eLeadAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    etaAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    etaLeadAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    phiAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    phiLeadAntiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+
     nJetsKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     deltaEKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     deltaRKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
@@ -340,7 +361,13 @@ int main( int argc, const char** argv ) {
     timeKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     areaKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     areaLeadKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
-    
+    ptLeadKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    eLeadKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    etaKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    etaLeadKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    phiKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    phiLeadKt->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+
     nJetsCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     deltaECa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     deltaRCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
@@ -349,6 +376,28 @@ int main( int argc, const char** argv ) {
     timeCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     areaCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
     areaLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    ptLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    eLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    etaCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    etaLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    phiCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    phiLeadCa->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+
+    nJetsSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    deltaESIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    deltaRSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    nPartSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    nPartLeadSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    timeSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    areaSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    areaLeadSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1] ).c_str() );
+    ptLeadSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    eLeadSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    etaSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    etaLeadSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    phiSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+    phiLeadSIS->GetXaxis()->SetBinLabel( i, patch::to_string( radii[i-1]).c_str() );
+
   }
   
   // start the event loop from event 0
@@ -400,27 +449,27 @@ int main( int argc, const char** argv ) {
         chargedEtaPhi->Fill( chargedFinal[i].eta(), chargedFinal[i].phi_std() );
       }
       
-      // now set up the clustering
-      fastjet::ClusterSequenceArea clusterAntiKtAll ( allFinal, antiKtBase, area_def );
-      std::vector<fastjet::PseudoJet> antiKtBaseJets = fastjet::sorted_by_pt(clusterAntiKtAll.inclusive_jets());
-      fastjet::ClusterSequenceArea clusterKtAll ( allFinal, KtBase, area_def );
-      std::vector<fastjet::PseudoJet> KtBaseJets = fastjet::sorted_by_pt(clusterKtAll.inclusive_jets());
-      fastjet::ClusterSequenceArea clusterCaAll ( allFinal, CaBase, area_def );
-      std::vector<fastjet::PseudoJet> CaBaseJets = fastjet::sorted_by_pt(clusterCaAll.inclusive_jets());
-      fastjet::ClusterSequenceArea clusterAntiKtCharged ( chargedFinal, antiKtBase, area_def );
-      std::vector<fastjet::PseudoJet> antiKtChargedJets = fastjet::sorted_by_pt(clusterAntiKtCharged.inclusive_jets());
-      fastjet::ClusterSequenceArea clusterKtCharged ( chargedFinal, KtBase, area_def );
-      std::vector<fastjet::PseudoJet> KtChargedJets = fastjet::sorted_by_pt(clusterKtCharged.inclusive_jets());
-      fastjet::ClusterSequenceArea clusterCaCharged ( chargedFinal, CaBase, area_def );
-      std::vector<fastjet::PseudoJet> CaChargedJets = fastjet::sorted_by_pt(clusterCaCharged.inclusive_jets());
+      // // now set up the clustering
+      // fastjet::ClusterSequenceArea clusterAntiKtAll ( allFinal, antiKtBase, area_def );
+      // std::vector<fastjet::PseudoJet> antiKtBaseJets = fastjet::sorted_by_pt(clusterAntiKtAll.inclusive_jets());
+      // fastjet::ClusterSequenceArea clusterKtAll ( allFinal, KtBase, area_def );
+      // std::vector<fastjet::PseudoJet> KtBaseJets = fastjet::sorted_by_pt(clusterKtAll.inclusive_jets());
+      // fastjet::ClusterSequenceArea clusterCaAll ( allFinal, CaBase, area_def );
+      // std::vector<fastjet::PseudoJet> CaBaseJets = fastjet::sorted_by_pt(clusterCaAll.inclusive_jets());
+      // fastjet::ClusterSequenceArea clusterAntiKtCharged ( chargedFinal, antiKtBase, area_def );
+      // std::vector<fastjet::PseudoJet> antiKtChargedJets = fastjet::sorted_by_pt(clusterAntiKtCharged.inclusive_jets());
+      // fastjet::ClusterSequenceArea clusterKtCharged ( chargedFinal, KtBase, area_def );
+      // std::vector<fastjet::PseudoJet> KtChargedJets = fastjet::sorted_by_pt(clusterKtCharged.inclusive_jets());
+      // fastjet::ClusterSequenceArea clusterCaCharged ( chargedFinal, CaBase, area_def );
+      // std::vector<fastjet::PseudoJet> CaChargedJets = fastjet::sorted_by_pt(clusterCaCharged.inclusive_jets());
 
-      // plot the number of jets by the different algorithms
-      nJetsAntiKtBaseAll->Fill( antiKtBaseJets.size() );
-      nJetsKtBaseAll->Fill( KtBaseJets.size() );
-      nJetsCaBaseAll->Fill( CaBaseJets.size() );
-      nJetsAntiKtBaseCharged->Fill( antiKtChargedJets.size() );
-      nJetsKtBaseCharged->Fill( KtChargedJets.size() );
-      nJetsCaBaseCharged->Fill( CaChargedJets.size() );
+      // // plot the number of jets by the different algorithms
+      // nJetsAntiKtBaseAll->Fill( antiKtBaseJets.size() );
+      // nJetsKtBaseAll->Fill( KtBaseJets.size() );
+      // nJetsCaBaseAll->Fill( CaBaseJets.size() );
+      // nJetsAntiKtBaseCharged->Fill( antiKtChargedJets.size() );
+      // nJetsKtBaseCharged->Fill( KtChargedJets.size() );
+      // nJetsCaBaseCharged->Fill( CaChargedJets.size() );
 
       // now we'll do the loop over differing radii
       for ( int i = 0; i < nRadii; ++i ) {
@@ -445,30 +494,38 @@ int main( int argc, const char** argv ) {
         fastjet::ClusterSequenceArea clusterCa( allFinal, CaDefs[i], area_def );
         //fastjet::ClusterSequence clusterCa( allFinal, CaDefs[i] );
         double caTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
+        start = clock::now();
+
+        fastjet::ClusterSequenceArea clusterSIS( allFinal, SISDefs[i], area_def );
+        double SISTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
         
         // fill timing measurements
         timeAntiKt->Fill( radBin.c_str(), antiKtTime, 1 );
         timeKt->Fill( radBin.c_str(), ktTime, 1 );
         timeCa->Fill( radBin.c_str(), caTime, 1 );
+        timeSIS->Fill( radBin.c_str(), SISTime, 1 );
         
-        std::vector<fastjet::PseudoJet> antiKtJets = fastjet::sorted_by_pt( fastjet::SelectorPtMin(0.2)(clusterAntiKt.inclusive_jets()) );
-        std::vector<fastjet::PseudoJet> KtJets = fastjet::sorted_by_pt( fastjet::SelectorPtMin(0.2)(clusterKt.inclusive_jets()) );
-        std::vector<fastjet::PseudoJet> CaJets = fastjet::sorted_by_pt( fastjet::SelectorPtMin(0.2)(clusterCa.inclusive_jets()) );
-        
+        std::vector<fastjet::PseudoJet> antiKtJets = fastjet::sorted_by_pt( fastjet::SelectorPtMin(1.0)(clusterAntiKt.inclusive_jets()) );
+        std::vector<fastjet::PseudoJet> KtJets = fastjet::sorted_by_pt( fastjet::SelectorPtMin(1.0)(clusterKt.inclusive_jets()) );
+        std::vector<fastjet::PseudoJet> CaJets = fastjet::sorted_by_pt( fastjet::SelectorPtMin(1.0)(clusterCa.inclusive_jets()) );
+        std::vector<fastjet::PseudoJet> SISJets = fastjet::sorted_by_pt( fastjet::SelectorPtMin(1.0)(clusterSIS.inclusive_jets()) );
         // now start to fill histograms
         // first, number of jets in the event
         nJetsAntiKt->Fill ( radBin.c_str(), antiKtJets.size(), 1 );
         nJetsKt->Fill ( radBin.c_str(), KtJets.size(), 1 );
         nJetsCa->Fill ( radBin.c_str(), CaJets.size(), 1 );
+        nJetsSIS->Fill( radBin.c_str(), SISJets.size(), 1 );
         
         // now, we'll do number of particles, and area, for both both leading jets and inclusive jets
         nPartLeadAntiKt->Fill ( radBin.c_str(), antiKtJets[0].constituents().size(), 1 );
         nPartLeadKt->Fill ( radBin.c_str(), KtJets[0].constituents().size(), 1 );
         nPartLeadCa->Fill ( radBin.c_str(), CaJets[0].constituents().size(), 1 );
+        nPartLeadSIS->Fill ( radBin.c_str(), SISJets[0].constituents().size(), 1 );
         areaLeadAntiKt->Fill ( radBin.c_str(), antiKtJets[0].area(), 1 );
         areaLeadKt->Fill ( radBin.c_str(), KtJets[0].area(), 1 );
         areaLeadCa->Fill ( radBin.c_str(), CaJets[0].area(), 1 );
-        
+        areaLeadSIS->Fill( radBin.c_str(), SISJets[0].area(), 1 );
+
         // fill leading jet spectra
         ptLeadAntiKt->Fill( radBin.c_str(), antiKtJets[0].pt(), 1 );
         eLeadAntiKt->Fill( radBin.c_str(), antiKtJets[0].E(), 1 );
@@ -476,6 +533,8 @@ int main( int argc, const char** argv ) {
         eLeadKt->Fill( radBin.c_str(), KtJets[0].E(), 1 );
         ptLeadCa->Fill( radBin.c_str(), CaJets[0].pt(), 1 );
         eLeadCa->Fill( radBin.c_str(), CaJets[0].E(), 1 );
+        ptLeadSIS->Fill( radBin.c_str(), SISJets[0].pt(), 1 );
+        eLeadSIS->Fill( radBin.c_str(), SISJets[0].E(), 1 );
         
         // leading jet eta & phi
         etaLeadAntiKt->Fill( radBin.c_str(), antiKtJets[0].eta(), 1 );
@@ -484,6 +543,8 @@ int main( int argc, const char** argv ) {
         phiLeadKt->Fill( radBin.c_str(), KtJets[0].phi_std(), 1 );
         etaLeadCa->Fill( radBin.c_str(), CaJets[0].eta(), 1 );
         phiLeadCa->Fill( radBin.c_str(), CaJets[0].phi_std(), 1 );
+        etaLeadSIS->Fill( radBin.c_str(), SISJets[0].eta(), 1 );
+        phiLeadSIS->Fill( radBin.c_str(), SISJets[0].phi_std(), 1 );
         
         for ( int j = 0; j < antiKtJets.size(); ++j ) {
           nPartAntiKt->Fill ( radBin.c_str(), antiKtJets[j].constituents().size(), 1 );
@@ -503,6 +564,12 @@ int main( int argc, const char** argv ) {
           etaCa->Fill( radBin.c_str(), CaJets[j].eta(), 1 );
           phiCa->Fill( radBin.c_str(), CaJets[j].phi_std(), 1 );
         }
+        for ( int j = 0; j < SISJets.size(); ++j ) {
+          nPartSIS->Fill( radBin.c_str(), SISJets[j].constituents().size(), 1 );
+          areaSIS->Fill( radBin.c_str(), SISJets[j].area(), 1 );
+          etaSIS->Fill( radBin.c_str(), SISJets[j].eta(), 1 );
+          phiSIS->Fill( radBin.c_str(), SISJets[j].phi_std(), 1 );
+        }
         
         // and compare to the initial partons for delta E and delta R
         // we find the minimum of the delta R between leading jet and parton1 and parton2
@@ -517,7 +584,7 @@ int main( int argc, const char** argv ) {
         deltaRAntiKt->Fill ( radBin.c_str(), partons[partonIdx].delta_R( antiKtJets[0] ), 1 );
         deltaEAntiKt->Fill ( radBin.c_str(), partons[partonIdx].E() - antiKtJets[0].E(), 1 );
         
-        // repeat for Kt and Ca
+        // repeat for Kt, Ca and SIScone
         distToPart1 = partons[0].delta_R( KtJets[0] );
         distToPart2 = partons[1].delta_R( KtJets[0] );
         partonIdx = 0;
@@ -534,6 +601,13 @@ int main( int argc, const char** argv ) {
         deltaRCa->Fill ( radBin.c_str(), partons[partonIdx].delta_R( CaJets[0] ), 1 );
         deltaECa->Fill ( radBin.c_str(), partons[partonIdx].E() - CaJets[0].E(), 1 );
         
+        distToPart1 = partons[0].delta_R( SISJets[0] );
+        distToPart2 = partons[1].delta_R( SISJets[0] );
+        partonIdx = 0;
+        if ( distToPart2 < distToPart1 )
+          partonIdx = 1;
+        deltaRSIS->Fill ( radBin.c_str(), partons[partonIdx].delta_R( SISJets[0] ), 1 );
+        deltaESIS->Fill ( radBin.c_str(), partons[partonIdx].E() - SISJets[0].E(), 1 );
       }
       
     }
@@ -566,13 +640,13 @@ int main( int argc, const char** argv ) {
   chargedE->Write();
   chargedEtaPhi->Write();
   
-  // jet multiplicity
-  nJetsAntiKtBaseAll->Write();
-  nJetsKtBaseAll->Write();
-  nJetsCaBaseAll->Write();
-  nJetsAntiKtBaseCharged->Write();
-  nJetsKtBaseCharged->Write();
-  nJetsCaBaseCharged->Write();
+  // // jet multiplicity
+  // nJetsAntiKtBaseAll->Write();
+  // nJetsKtBaseAll->Write();
+  // nJetsCaBaseAll->Write();
+  // nJetsAntiKtBaseCharged->Write();
+  // nJetsKtBaseCharged->Write();
+  // nJetsCaBaseCharged->Write();
   
   // histograms for differing radii
   nJetsAntiKt->Write();
@@ -619,6 +693,21 @@ int main( int argc, const char** argv ) {
   etaLeadCa->Write();
   phiCa->Write();
   phiLeadCa->Write();
+
+  nJetsSIS->Write();
+  nPartSIS->Write();
+  nPartLeadSIS->Write();
+  deltaESIS->Write();
+  deltaRSIS->Write();
+  timeSIS->Write();
+  areaSIS->Write();
+  areaLeadSIS->Write();
+  ptLeadSIS->Write();
+  eLeadSIS->Write();
+  etaSIS->Write();
+  etaLeadSIS->Write();
+  phiSIS->Write();
+  phiLeadSIS->Write();
   
   // close the output file
   out.Close();
