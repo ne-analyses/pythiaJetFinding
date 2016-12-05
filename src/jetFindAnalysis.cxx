@@ -414,7 +414,6 @@ int main( int argc, const char** argv ) {
       // pythia succeeded, so increment the event
       currentEvent++;
 
-      std::cout<<"current event: "<<currentEvent<<std::endl;
       // output event number
       if ( currentEvent%50 == 0 )
         std::cout<<"Event: "<<currentEvent<<std::endl;
@@ -474,7 +473,7 @@ int main( int argc, const char** argv ) {
 
       // now we'll do the loop over differing radii
       for ( int i = 0; i < nRadii; ++i ) {
-        std::cout<<"rad: "<<i<<std::endl;
+
         std::string radBin = patch::to_string( radii[i] );
         
         // first perform the clustering
