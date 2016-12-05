@@ -30,7 +30,7 @@ endif
 ROOTLIBS      = $(shell root-config --libs)
 
 LIBPATH       = -L$(FASTJETDIR)/lib -L$(PYTHIA8DIR)/lib $(ROOTLIBS)
-LIBS          = -lfastjet -lfastjettools -lsiscone -lsiscone_spherical -lfastjetplugins -lpythia8
+LIBS          = -lfastjettools -lfastjet -lfastjetplugins -lsiscone_spherical -lsiscone -lpythia8
 
 
 # for cleanup
