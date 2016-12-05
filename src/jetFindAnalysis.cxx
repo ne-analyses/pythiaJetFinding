@@ -329,7 +329,7 @@ int main( int argc, const char** argv ) {
   TH2D* deltaRSIS = new TH2D( "sisdeltaR", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
   TH2D* nPartSIS = new TH2D( "sisnpart", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
   TH2D* nPartLeadSIS = new TH2D( "sisnpartlead", "Number of Particles per Leading Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
-  TH2D* timeSIS = new TH2D("sisclustertime", "Time Required to cluster - Kt", nRadii, -0.5, nRadii-0.5, 500, -0.5, 999999.5);
+  TH2D* timeSIS = new TH2D("sisclustertime", "Time Required to cluster - Kt", nRadii, -0.5, nRadii-0.5, 500, -0.5, 9999999.5);
   TH2D* areaSIS = new TH2D("sisarea", "Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
   TH2D* areaLeadSIS = new TH2D("sisarealead", "Lead Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
   TH2D* ptLeadSIS = new TH2D("sisptlead", "Lead Jet Pt - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
