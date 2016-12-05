@@ -129,6 +129,9 @@ int main( int argc, const char** argv ) {
   
   typedef std::chrono::high_resolution_clock clock;
   
+  // we will time the analysis
+  std::chrono::time_point<clock> analysis_start = clock::now();
+  
   // set parameters
   unsigned exponent;
   std::string outFile;
@@ -711,7 +714,11 @@ int main( int argc, const char** argv ) {
   
   // close the output file
   out.Close();
-
+  
+  // stop timing and report
+  double analysis_time = std::chrono::duration_cast<std::chrono::seconds>(clock::now() - analysis_start).count();
+  std::cout<<"Analysis of " << maxEvent <<" Pythia events took " << analysis_time << " seconds. Exiting" << std::endl;
+  
   return 0;
 }
 
