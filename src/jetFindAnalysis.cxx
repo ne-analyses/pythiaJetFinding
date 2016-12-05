@@ -54,6 +54,7 @@
 #include "fastjet/ClusterSequencePassiveArea.hh"
 #include "fastjet/ClusterSequenceActiveArea.hh"
 #include "fastjet/ClusterSequenceActiveAreaExplicitGhosts.hh"
+#include "fastjet/SISConePlugin.hh"
 #include "fastjet/Selector.hh"
 #include "fastjet/FunctionOfPseudoJet.hh"
 #include "fastjet/tools/JetMedianBackgroundEstimator.hh"
@@ -190,12 +191,14 @@ int main( int argc, const char** argv ) {
 
   // but we will also be testing these with different radii, so we'll initialize that here
   // there will be nRadii different radii, in increments of deltaRad;
-  int nRadii = 10;
+  const int nRadii = 10;
   double deltaRad = 0.1;
+  double overlap_threshold = 0.75;
   double radii[nRadii];
-  fastjet::JetDefinition antiKtDefs[10];
-  fastjet::JetDefinition KtDefs[10];
-  fastjet::JetDefinition CaDefs[10];
+  fastjet::JetDefinition antiKtDefs[nRadii];
+  fastjet::JetDefinition KtDefs[nRadii];
+  fastjet::JetDefinition CaDefs[nRadii];
+  fastjet::JetDefinition SISCone[nRadii];
   
   for ( int i = 0; i < nRadii; ++i ) {
     radii[i] = deltaRad * (i+1);
@@ -203,6 +206,10 @@ int main( int argc, const char** argv ) {
     antiKtDefs[i] = fastjet::JetDefinition( fastjet::antikt_algorithm, radii[i] );
     KtDefs[i] = fastjet::JetDefinition( fastjet::kt_algorithm, radii[i] );
     CaDefs[i] = fastjet::JetDefinition( fastjet::cambridge_algorithm, radii[i] );
+
+    // and for SISCone
+    fastjet::JetDefinition::Plugin * plugin = new fastjet::SISConePlugin(radii[i], overlap_threshold);
+    SISCone[i] = fastjet::JetDefinition(plugin);
   }
 
   // set up our fastjet environment
