@@ -281,7 +281,7 @@ int main( int argc, const char** argv ) {
   TH2D* deltaRAntiKt = new TH2D( "antiktdeltaR", "#Delta R Leading - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
   TH2D* nPartAntiKt = new TH2D( "antiktnpart", "Number of Particles per Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
   TH2D* nPartLeadAntiKt = new TH2D( "antiktnpartlead", "Number of Particles per Leading Jet - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
-  TH2D* timeAntiKt = new TH2D("antiktclustertime", "Time Required to cluster - Anti-Kt", nRadii, -0.5, nRadii-0.5, 500, -0.5, 99999.5);
+  TH2D* timeAntiKt = new TH2D("antiktclustertime", "Time Required to cluster - Anti-Kt", nRadii, -0.5, nRadii-0.5, 500, -0.5, 19999.5);
   TH2D* areaAntiKt = new TH2D("antiktarea", "Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
   TH2D* areaLeadAntiKt = new TH2D("antiktarealead", "Lead Jet Area - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
   TH2D* ptLeadAntiKt = new TH2D("antiktptlead", "Lead Jet Pt - Anti-Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
@@ -297,7 +297,7 @@ int main( int argc, const char** argv ) {
   TH2D* deltaRKt = new TH2D( "ktdeltaR", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
   TH2D* nPartKt = new TH2D( "ktnpart", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
   TH2D* nPartLeadKt = new TH2D( "ktnpartlead", "Number of Particles per Leading Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
-  TH2D* timeKt = new TH2D("ktclustertime", "Time Required to cluster - Kt", nRadii, -0.5, nRadii-0.5, 500, -0.5, 99999.5);
+  TH2D* timeKt = new TH2D("ktclustertime", "Time Required to cluster - Kt", nRadii, -0.5, nRadii-0.5, 500, -0.5, 19999.5);
   TH2D* areaKt = new TH2D("ktarea", "Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
   TH2D* areaLeadKt = new TH2D("ktarealead", "Lead Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
   TH2D* ptLeadKt = new TH2D("ktptlead", "Lead Jet Pt - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
@@ -313,7 +313,7 @@ int main( int argc, const char** argv ) {
   TH2D* deltaRCa = new TH2D( "cadeltaR", "#Delta R Leading - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
   TH2D* nPartCa = new TH2D( "canpart", "Number of Particles per Jet - CA", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
   TH2D* nPartLeadCa = new TH2D( "canpartlead", "Number of Particles per Leading Jet - CA", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
-  TH2D* timeCa = new TH2D("caclustertime", "Time Required to cluster - CA", nRadii, -0.5, nRadii-0.5, 500, -0.5, 99999.5);
+  TH2D* timeCa = new TH2D("caclustertime", "Time Required to cluster - CA", nRadii, -0.5, nRadii-0.5, 500, -0.5, 19999.5);
   TH2D* areaCa = new TH2D("caarea", "Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
   TH2D* areaLeadCa = new TH2D("caarealead", "Lead Jet Area - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
   TH2D* ptLeadCa = new TH2D("captlead", "Lead Jet Pt - CA", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
@@ -329,7 +329,7 @@ int main( int argc, const char** argv ) {
   TH2D* deltaRSIS = new TH2D( "sisdeltaR", "#Delta R - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2.0 );
   TH2D* nPartSIS = new TH2D( "sisnpart", "Number of Particles per Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
   TH2D* nPartLeadSIS = new TH2D( "sisnpartlead", "Number of Particles per Leading Jet - Kt", nRadii, -0.5, nRadii-0.5, 100, -0.5, 599.5 );
-  TH2D* timeSIS = new TH2D("sisclustertime", "Time Required to cluster - Kt", nRadii, -0.5, nRadii-0.5, 500, -0.5, 99999.5);
+  TH2D* timeSIS = new TH2D("sisclustertime", "Time Required to cluster - Kt", nRadii, -0.5, nRadii-0.5, 500, -0.5, 999999.5);
   TH2D* areaSIS = new TH2D("sisarea", "Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
   TH2D* areaLeadSIS = new TH2D("sisarealead", "Lead Jet Area - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 2*TMath::Pi() );
   TH2D* ptLeadSIS = new TH2D("sisptlead", "Lead Jet Pt - Kt", nRadii, -0.5, nRadii-0.5, 100, 0, 1000 );
