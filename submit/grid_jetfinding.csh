@@ -8,7 +8,7 @@
 set ExecPath = `pwd`
 set analysis = $1
 set execute = './bin/jetFindAnalysis'
-set exponent = 3
+set exponent = 2
 set xmldir = /wsu/home/dx/dx54/dx5412/software/pythia8212/share/Pythia8/xmldoc
 
 # Now Submit jobs for each data file
