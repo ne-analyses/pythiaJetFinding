@@ -136,7 +136,7 @@ int main( int argc, const char** argv ) {
 
   switch ( argc ) {
     case 1: {
-      exponent = 4;
+      exponent = 3;
       outFile = "out/test.root";
       //xmldir = "/Users/nick/physics/software/pythia8/share/Pythia8/xmldoc";
       xmldir = "/wsu/home/dx/dx54/dx5412/software/pythia8219/share/Pythia8/xmldoc";
@@ -414,6 +414,7 @@ int main( int argc, const char** argv ) {
       // pythia succeeded, so increment the event
       currentEvent++;
 
+      std::cout<<"current event: "<<currentEvent<<std::endl;
       // output event number
       if ( currentEvent%50 == 0 )
         std::cout<<"Event: "<<currentEvent<<std::endl;
@@ -473,7 +474,7 @@ int main( int argc, const char** argv ) {
 
       // now we'll do the loop over differing radii
       for ( int i = 0; i < nRadii; ++i ) {
-
+        std::cout<<"rad: "<<i<<std::endl;
         std::string radBin = patch::to_string( radii[i] );
         
         // first perform the clustering
