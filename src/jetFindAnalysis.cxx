@@ -139,7 +139,7 @@ int main( int argc, const char** argv ) {
 
   switch ( argc ) {
     case 1: {
-      exponent = 3;
+      exponent = 1;
       outFile = "out/test.root";
       //xmldir = "/Users/nick/physics/software/pythia8/share/Pythia8/xmldoc";
       xmldir = "/wsu/home/dx/dx54/dx5412/software/pythia8219/share/Pythia8/xmldoc";
