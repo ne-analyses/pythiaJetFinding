@@ -127,6 +127,12 @@ int convertToPseudoJet( Pythia8::Pythia& p, double max_rap, std::vector<fastjet:
 
 int main( int argc, const char** argv ) {
   
+  // Histograms will calculate gaussian errors
+  // -----------------------------------------
+  TH1::SetDefaultSumw2( );
+  TH2::SetDefaultSumw2( );
+  TH3::SetDefaultSumw2( );
+  
   typedef std::chrono::high_resolution_clock clock;
   
   // we will time the analysis

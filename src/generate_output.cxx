@@ -50,6 +50,9 @@
 
 int main ( int argc, const char** argv ) {
   
+  gStyle->SetOptStat(false);
+  gStyle->SetOptFit(false);
+  
   // get the input file name
   unsigned exponent;
   std::string inFile;
@@ -90,6 +93,7 @@ int main ( int argc, const char** argv ) {
   // and the relevant jetfinding radii
   const unsigned nRadii = 10;
   std::string radii[nRadii] = { "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0" };
+  unsigned baseRad = 7;
   
   // store the histograms in arrays of TH2Ds
   TH2D* histograms[nJetFinders][nHistograms];
@@ -118,14 +122,17 @@ int main ( int argc, const char** argv ) {
     }
   }
   
-  TCanvas c1;
-  for ( int i = 0; i < nRadii; ++i ) {
-    if ( i == 0)
-    hist1D[0][2][i]->Draw();
-    else
-    hist1D[0][2][i]->Draw("same");
+
+  
+  // first produce measures of number of jets
+  TCanvas* c1 = new TCanvas();
+  for ( int i = 0; i < nJetFinders; ++ i ) {
+    hist1D[i][0][baseRad]->SetTitle("Number of Jets");
+    hist1D[i][0][baseRad]->SetLineColor(i);
+    hist1D[i][0][baseRad]->SetLineWidth(2);
+    
+    
   }
-  c1.SaveAs("test.pdf");
   
   return 0;
 }
