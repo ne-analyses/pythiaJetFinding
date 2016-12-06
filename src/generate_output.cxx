@@ -25,6 +25,7 @@
 #include "TSystem.h"
 #include "TStyle.h"
 #include "TLegend.h"
+#include "TGraphErrors.h"
 
 // My standard includes
 // Make use of std::vector,
@@ -95,6 +96,8 @@ int main ( int argc, const char** argv ) {
   
   // and the relevant jetfinding radii
   const unsigned nRadii = 10;
+  double rad[nRadii] = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
+  double zeros[nRadii] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
   std::string radii[nRadii] = { "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0" };
   unsigned baseRad = 7;
   
@@ -126,7 +129,7 @@ int main ( int argc, const char** argv ) {
   }
   
 
-  
+  // ------------------------------------------------
   // first produce measures of number of jets
   TCanvas* c1 = new TCanvas();
   TLegend* leg = new TLegend(0.6,0.7,0.9,0.9);
@@ -150,7 +153,44 @@ int main ( int argc, const char** argv ) {
   }
   leg->Draw();
   
-  c1->SaveAs("test.pdf");
+  c1->SaveAs("tmp/njetbase.pdf");
+  
+  
+  c1 = new TCanvas();
+  leg = new TLegend(0.6,0.7,0.9,0.9);
+  double njet[nJetFinders][nRadii];
+  double njeterror[nJetFinders][nRadii];
+  TGraphErrors* njetGraph[nJetFinders];
+  for ( int i = 0; i < nJetFinders; ++i ) {
+    for ( int j = 0; j < nRadii; ++j ) {
+      njet[i][j] = hist1D[i][0][j]->GetMean();
+      njeterror[i][j] = hist1D[i][0][j]->GetRMS();
+    }
+    njetGraph[i] = new TGraphErrors( nRadii, rad, zeros, njet[i], njeterror[i] );
+    
+    njetGraph[i]->SetTitle("Average Number of Jets");
+    njetGraph[i]->GetXaxis()->SetTitle("Radius");
+    njetGraph[i]->GetYaxis()->SetTitle("Number of Jets");
+    njetGraph[i]->SetLineColor(1+i);
+    njetGraph[i]->SetLineWidth(2);
+    njetGraph[i]->SetMarkerStyle(20+i);
+    njetGraph[i]->SetMarkerColor(1+i);
+    
+    leg->AddEntry( njetGraph, radii[i].c_str(), "lep"  );
+    
+    if ( i == 0 ) {
+      njetGraph[i]->Draw();
+    }
+    else {
+      njetGraph[i]->Draw("SAME");
+    }
+  }
+  leg->Draw();
+  
+  c1->SaveAs("tmp/njetrad.pdf");
+  
+  // ------------------------------------------------
+  
   
   return 0;
 }
