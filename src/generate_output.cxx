@@ -23,6 +23,7 @@
 #include "TCanvas.h"
 #include "TStopwatch.h"
 #include "TSystem.h"
+#include "TStyle.h"
 
 // My standard includes
 // Make use of std::vector,
