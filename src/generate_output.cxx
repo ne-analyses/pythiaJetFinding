@@ -181,9 +181,9 @@ int main ( int argc, const char** argv ) {
     if ( i == 0 ) {
       njetGraph[i]->Draw();
     }
-//    else {
-//      njetGraph[i]->Draw("SAME");
-//    }
+    else {
+      njetGraph[i]->Draw("P");
+    }
   }
   leg->Draw();
   
