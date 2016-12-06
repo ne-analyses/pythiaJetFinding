@@ -133,13 +133,13 @@ int main ( int argc, const char** argv ) {
   for ( int i = 0; i < nJetFinders; ++ i ) {
     hist1D[i][0][baseRad]->SetTitle("Number of Jets");
     hist1D[i][0][baseRad]->GetXaxis()->SetTitle("Jets per Event");
-    hist1D[i][0][baseRad]->GetYaxis()->SetLineColor("Count");
+    hist1D[i][0][baseRad]->GetYaxis()->SetTitle("Count");
     hist1D[i][0][baseRad]->SetLineColor(i);
     hist1D[i][0][baseRad]->SetLineWidth(2);
     hist1D[i][0][baseRad]->SetMarkerStyle(20+i);
     hist1D[i][0][baseRad]->SetMarkerColor(i);
     
-    leg->AddEntry( hist1D[i][0][baseRad], jfString[i], "lep"  );
+    leg->AddEntry( hist1D[i][0][baseRad], jfString[i].c_str(), "lep"  );
     if ( i == 0 ) {
       hist1D[i][0][baseRad]->Draw();
     }
