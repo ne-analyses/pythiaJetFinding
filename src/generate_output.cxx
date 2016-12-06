@@ -176,7 +176,7 @@ int main ( int argc, const char** argv ) {
     njetGraph[i]->SetMarkerStyle(20+i);
     njetGraph[i]->SetMarkerColor(1+i);
     
-    leg->AddEntry( njetGraph, radii[i].c_str(), "lep"  );
+    leg->AddEntry( njetGraph[i], radii[i].c_str(), "lep"  );
     
     if ( i == 0 ) {
       njetGraph[i]->Draw();
