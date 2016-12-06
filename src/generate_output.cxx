@@ -85,6 +85,7 @@ int main ( int argc, const char** argv ) {
   // first, jetfinder names
   const unsigned nJetFinders = 4;
   std::string jfNames[nJetFinders] = { "antikt", "kt", "ca", "sis" };
+  std::string jfString[nJetFinders] = { "Anti-Kt", "Kt", "Cambridge-Aachen", "SISCone" };
   
   // now, the histogram names
   const unsigned nHistograms = 14;
@@ -127,13 +128,28 @@ int main ( int argc, const char** argv ) {
   
   // first produce measures of number of jets
   TCanvas* c1 = new TCanvas();
+  TLegend* leg = new TLegend(0.6,0.7,0.9,0.9);
   for ( int i = 0; i < nJetFinders; ++ i ) {
     hist1D[i][0][baseRad]->SetTitle("Number of Jets");
+    hist1D[i][0][baseRad]->GetXaxis()->SetTitle("Jets per Event");
+    hist1D[i][0][baseRad]->SetYaxis()->SetLineColor("Count");
     hist1D[i][0][baseRad]->SetLineColor(i);
     hist1D[i][0][baseRad]->SetLineWidth(2);
+    hist1D[i][0][baseRad]->SetMarkerStyle(20+i);
+    hist1D[i][0][baseRad]->SetMarkerColor(i);
     
+    leg->AddEntry( hist1D[i][0][baseRad], jfString[i], "lep"  );
+    if ( i == 0 ) {
+      hist1D[i][0][baseRad]->Draw();
+    }
+    else {
+      hist1D[i][0][baseRad]->Draw("SAME");
+    }
     
   }
+  leg->Draw();
+  
+  c1.SaveAs("test.pdf");
   
   return 0;
 }
