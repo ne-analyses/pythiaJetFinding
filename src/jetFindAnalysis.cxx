@@ -493,21 +493,21 @@ int main( int argc, const char** argv ) {
         
         fastjet::ClusterSequenceArea clusterAntiKt( allFinal, antiKtDefs[i], area_def );
         //fastjet::ClusterSequence clusterAntiKt( allFinal, antiKtDefs[i] );
-        double antiKtTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
+        double antiKtTime = std::chrono::duration_cast<std::chrono::milliseconds>(clock::now() - start).count();
         start = clock::now();
         
         fastjet::ClusterSequenceArea clusterKt( allFinal, KtDefs[i], area_def );
         //fastjet::ClusterSequence clusterKt( allFinal, KtDefs[i] );
-        double ktTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
+        double ktTime = std::chrono::duration_cast<std::chrono::milliseconds>(clock::now() - start).count();
         start = clock::now();
         
         fastjet::ClusterSequenceArea clusterCa( allFinal, CaDefs[i], area_def );
         //fastjet::ClusterSequence clusterCa( allFinal, CaDefs[i] );
-        double caTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
+        double caTime = std::chrono::duration_cast<std::chrono::milliseconds>(clock::now() - start).count();
         start = clock::now();
 
         fastjet::ClusterSequenceArea clusterSIS( allFinal, SISDefs[i], area_def );
-        double SISTime = std::chrono::duration_cast<std::chrono::microseconds>(clock::now() - start).count();
+        double SISTime = std::chrono::duration_cast<std::chrono::milliseconds>(clock::now() - start).count();
         
         // fill timing measurements
         timeAntiKt->Fill( radBin.c_str(), antiKtTime, 1 );
