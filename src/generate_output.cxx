@@ -297,7 +297,7 @@ int main ( int argc, const char** argv ) {
       deltaE[i][j] = hist1D[i][1][j]->GetMean();
       deltaEerror[i][j] = hist1D[i][1][j]->GetRMS();
     }
-    std::cout<<"got here: i j "<<i<<" "<<j<<std::endl;
+    std::cout<<"got here!"<<std::endl;
     double shift[nRadii] = { rad[0] + 0.01*i, rad[1] + 0.01*i, rad[2] + 0.01*i, rad[3] + 0.01*i, rad[4] + 0.01*i, rad[5] + 0.01*i, rad[6] + 0.01*i, rad[7] + 0.01*i, rad[8] + 0.01*i, rad[9] + 0.01*i };
     
     npartGraph[i] = new TGraphErrors( nRadii, shift, deltaE[i], zeros, deltaEerror[i] );
