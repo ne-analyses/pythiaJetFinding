@@ -393,20 +393,20 @@ int main ( int argc, const char** argv ) {
   c1 = new TCanvas();
   leg = new TLegend(0.6,0.7,0.9,0.9);
   for ( int i = 0; i < nJetFinders; ++ i ) {
-    hist1D[i][6][baseRad]->SetTitle("Clustering time");
-    hist1D[i][6][baseRad]->GetXaxis()->SetTitle("milliseconds");
-    hist1D[i][6][baseRad]->GetYaxis()->SetTitle("Count");
-    hist1D[i][6][baseRad]->SetLineColor(1+i);
-    hist1D[i][6][baseRad]->SetLineWidth(2);
-    hist1D[i][6][baseRad]->SetMarkerStyle(20+i);
-    hist1D[i][6][baseRad]->SetMarkerColor(1+i);
+    hist1D[i][5][baseRad]->SetTitle("Clustering time");
+    hist1D[i][5][baseRad]->GetXaxis()->SetTitle("milliseconds");
+    hist1D[i][5][baseRad]->GetYaxis()->SetTitle("Count");
+    hist1D[i][5][baseRad]->SetLineColor(1+i);
+    hist1D[i][5][baseRad]->SetLineWidth(2);
+    hist1D[i][5][baseRad]->SetMarkerStyle(20+i);
+    hist1D[i][5][baseRad]->SetMarkerColor(1+i);
     
-    leg->AddEntry( hist1D[i][6][baseRad], jfString[i].c_str(), "lep"  );
+    leg->AddEntry( hist1D[i][5][baseRad], jfString[i].c_str(), "lep"  );
     if ( i == 0 ) {
-      hist1D[i][6][baseRad]->Draw();
+      hist1D[i][5][baseRad]->Draw();
     }
     else {
-      hist1D[i][6][baseRad]->Draw("SAME");
+      hist1D[i][5][baseRad]->Draw("SAME");
     }
     
   }
@@ -421,23 +421,23 @@ int main ( int argc, const char** argv ) {
   TGraphErrors* clusterGraph[nJetFinders];
   for ( int i = 0; i < nJetFinders; ++i ) {
     for ( int j = 0; j < nRadii; ++j ) {
-      cluster[i][j] = hist1D[i][6][j]->GetMean();
-      clustererror[i][j] = hist1D[i][6][j]->GetRMS();
+      cluster[i][j] = hist1D[i][5][j]->GetMean();
+      clustererror[i][j] = hist1D[i][5][j]->GetRMS();
     }
     
     double shift[nRadii] = { rad[0] + 0.01*i, rad[1] + 0.01*i, rad[2] + 0.01*i, rad[3] + 0.01*i, rad[4] + 0.01*i, rad[5] + 0.01*i, rad[6] + 0.01*i, rad[7] + 0.01*i, rad[8] + 0.01*i, rad[9] + 0.01*i };
     
     clusterGraph[i] = new TGraphErrors( nRadii, shift, cluster[i], zeros, zeros );
     
-    clusterGraph[i]->SetTitle("Average #Delta R (jet - parton)");
+    clusterGraph[i]->SetTitle("Clustering Time by Radius");
     clusterGraph[i]->GetXaxis()->SetTitle("Radius");
-    clusterGraph[i]->GetYaxis()->SetTitle("#Delta R");
+    clusterGraph[i]->GetYaxis()->SetTitle("Clustering Time (ms)");
     clusterGraph[i]->SetLineColor(1+i);
     clusterGraph[i]->SetLineWidth(2);
     clusterGraph[i]->SetMarkerStyle(20+i);
     clusterGraph[i]->SetMarkerColor(1+i);
     
-    leg->AddEntry( deltaRGraph[i], jfString[i].c_str(), "lep"  );
+    leg->AddEntry( clusterGraph[i], jfString[i].c_str(), "lep"  );
     
     if ( i == 0 ) {
       clusterGraph[i]->Draw("AP");
