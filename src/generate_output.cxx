@@ -222,7 +222,7 @@ int main ( int argc, const char** argv ) {
   
   
   c1 = new TCanvas();
-  leg = new TLegend(0.6,0.7,0.9,0.9);
+  leg = new TLegend(0.1,0.7,0.3,0.9);
   double npart[nJetFinders][nRadii];
   double nparterror[nJetFinders][nRadii];
   TGraphErrors* npartGraph[nJetFinders];
