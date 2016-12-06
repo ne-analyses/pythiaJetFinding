@@ -169,7 +169,7 @@ int main ( int argc, const char** argv ) {
     
     double shift[nRadii] = { rad[0] + 0.01*i, rad[1] + 0.01*i, rad[2] + 0.01*i, rad[3] + 0.01*i, rad[4] + 0.01*i, rad[5] + 0.01*i, rad[6] + 0.01*i, rad[7] + 0.01*i, rad[8] + 0.01*i, rad[9] + 0.01*i };
     
-    njetGraph[i] = new TGraphErrors( nRadii, rad, njet[i], zeros, njeterror[i] );
+    njetGraph[i] = new TGraphErrors( nRadii, shift, njet[i], zeros, njeterror[i] );
     
     njetGraph[i]->SetTitle("Average Number of Jets");
     njetGraph[i]->GetXaxis()->SetTitle("Radius");
