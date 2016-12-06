@@ -79,8 +79,8 @@ int main ( int argc, const char** argv ) {
   // give the histogram name
   
   // first, jetfinder names
-  const unsigned nJetFinders = 3;
-  std::string jfNames[nJetFinders] = { "antikt", "kt", "ca" };
+  const unsigned nJetFinders = 4;
+  std::string jfNames[nJetFinders] = { "antikt", "kt", "ca", "sis" };
   
   // now, the histogram names
   const unsigned nHistograms = 14;
@@ -122,8 +122,8 @@ int main ( int argc, const char** argv ) {
   for ( int i = 0; i < nRadii; ++i ) {
     if ( i == 0)
     hist1D[0][0][i]->Draw();
-    //else
-    //hist1D[0][0][i]->Draw("same");
+    else
+    hist1D[0][0][i]->Draw("same");
   }
   c1.SaveAs("test.pdf");
   
