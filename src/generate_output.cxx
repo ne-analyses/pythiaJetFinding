@@ -195,9 +195,9 @@ int main ( int argc, const char** argv ) {
   // ------------------------------------------------
   
   // ------------------------------------------------
-  // first produce measures of number of particles in jets
-  TCanvas* c1 = new TCanvas();
-  TLegend* leg = new TLegend(0.6,0.7,0.9,0.9);
+  // produce measures of number of particles in jets
+   c1 = new TCanvas();
+  leg = new TLegend(0.6,0.7,0.9,0.9);
   for ( int i = 0; i < nJetFinders; ++ i ) {
     hist1D[i][4][baseRad]->SetTitle("Number of Particles in Leading Jet");
     hist1D[i][4][baseRad]->GetXaxis()->SetTitle("Particles Per Leading Jet");
@@ -228,29 +228,29 @@ int main ( int argc, const char** argv ) {
   TGraphErrors* npartGraph[nJetFinders];
   for ( int i = 0; i < nJetFinders; ++i ) {
     for ( int j = 0; j < nRadii; ++j ) {
-      npart[i][j] = hist1D[i][r][j]->GetMean();
+      npart[i][j] = hist1D[i][4][j]->GetMean();
       nparterror[i][j] = hist1D[i][4][j]->GetRMS();
     }
     
     double shift[nRadii] = { rad[0] + 0.01*i, rad[1] + 0.01*i, rad[2] + 0.01*i, rad[3] + 0.01*i, rad[4] + 0.01*i, rad[5] + 0.01*i, rad[6] + 0.01*i, rad[7] + 0.01*i, rad[8] + 0.01*i, rad[9] + 0.01*i };
     
-    njetGraph[i] = new TGraphErrors( nRadii, shift, npart[i], zeros, nparterror[i] );
+    npartGraph[i] = new TGraphErrors( nRadii, shift, npart[i], zeros, nparterror[i] );
     
-    njetGraph[i]->SetTitle("Average Number of Particles in Leading Jet");
-    njetGraph[i]->GetXaxis()->SetTitle("Radius");
-    njetGraph[i]->GetYaxis()->SetTitle("Particle Count");
-    njetGraph[i]->SetLineColor(1+i);
-    njetGraph[i]->SetLineWidth(2);
-    njetGraph[i]->SetMarkerStyle(20+i);
-    njetGraph[i]->SetMarkerColor(1+i);
+    npartGraph[i]->SetTitle("Average Number of Particles in Leading Jet");
+    npartGraph[i]->GetXaxis()->SetTitle("Radius");
+    npartGraph[i]->GetYaxis()->SetTitle("Particle Count");
+    npartGraph[i]->SetLineColor(1+i);
+    npartGraph[i]->SetLineWidth(2);
+    npartGraph[i]->SetMarkerStyle(20+i);
+    npartGraph[i]->SetMarkerColor(1+i);
     
-    leg->AddEntry( njetGraph[i], jfString[i].c_str(), "lep"  );
+    leg->AddEntry( npartGraph[i], jfString[i].c_str(), "lep"  );
     
     if ( i == 0 ) {
-      njetGraph[i]->Draw("AP");
+      npartGraph[i]->Draw("AP");
     }
     else {
-      njetGraph[i]->Draw("P");
+      npartGraph[i]->Draw("P");
     }
   }
   leg->Draw();
