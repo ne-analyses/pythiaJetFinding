@@ -285,10 +285,10 @@ int main ( int argc, const char** argv ) {
   leg->Draw();
   
   c1->SaveAs("tmp/deltaEbase.pdf");
-  
+  std::cout<<"GOT HERE"<<std::endl;
   
   c1 = new TCanvas();
-  leg = new TLegend(0.1,0.7,0.3,0.9);
+  leg = new TLegend(0.6,0.7,0.6,0.9);
   double deltaE[nJetFinders][nRadii];
   double deltaEerror[nJetFinders][nRadii];
   TGraphErrors* deltaEGraph[nJetFinders];
@@ -297,7 +297,7 @@ int main ( int argc, const char** argv ) {
       deltaE[i][j] = hist1D[i][1][j]->GetMean();
       deltaEerror[i][j] = hist1D[i][1][j]->GetRMS();
     }
-    
+    std::cout<<"got here: i j "<<i<<" "<<j<<std::endl;
     double shift[nRadii] = { rad[0] + 0.01*i, rad[1] + 0.01*i, rad[2] + 0.01*i, rad[3] + 0.01*i, rad[4] + 0.01*i, rad[5] + 0.01*i, rad[6] + 0.01*i, rad[7] + 0.01*i, rad[8] + 0.01*i, rad[9] + 0.01*i };
     
     npartGraph[i] = new TGraphErrors( nRadii, shift, deltaE[i], zeros, deltaEerror[i] );
