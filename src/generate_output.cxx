@@ -137,7 +137,7 @@ int main ( int argc, const char** argv ) {
     hist1D[i][0][baseRad]->SetLineColor(1+i);
     hist1D[i][0][baseRad]->SetLineWidth(2);
     hist1D[i][0][baseRad]->SetMarkerStyle(20+i);
-    hist1D[i][0][baseRad]->SetMarkerColor(i);
+    hist1D[i][0][baseRad]->SetMarkerColor(1+i);
     
     leg->AddEntry( hist1D[i][0][baseRad], jfString[i].c_str(), "lep"  );
     if ( i == 0 ) {
