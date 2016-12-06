@@ -149,7 +149,7 @@ int main ( int argc, const char** argv ) {
   }
   leg->Draw();
   
-  c1.SaveAs("test.pdf");
+  c1->SaveAs("test.pdf");
   
   return 0;
 }
