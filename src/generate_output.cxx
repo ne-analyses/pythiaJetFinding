@@ -166,7 +166,7 @@ int main ( int argc, const char** argv ) {
       njet[i][j] = hist1D[i][0][j]->GetMean();
       njeterror[i][j] = hist1D[i][0][j]->GetRMS();
     }
-    njetGraph[i] = new TGraphErrors( nRadii, rad, zeros, njet[i], njeterror[i] );
+    njetGraph[i] = new TGraphErrors( nRadii, rad, njet[i], zeros, njeterror[i] );
     
     njetGraph[i]->SetTitle("Average Number of Jets");
     njetGraph[i]->GetXaxis()->SetTitle("Radius");
