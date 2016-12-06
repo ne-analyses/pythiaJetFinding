@@ -308,7 +308,6 @@ int main ( int argc, const char** argv ) {
     deltaEGraph[i]->SetLineWidth(2);
     deltaEGraph[i]->SetMarkerStyle(20+i);
     deltaEGraph[i]->SetMarkerColor(1+i);
-    deltaEGraph[i]->GetYaxis()->SetRangeUser(0, 550 );
     
     leg->AddEntry( deltaEGraph[i], jfString[i].c_str(), "lep"  );
     
