@@ -394,7 +394,7 @@ int main ( int argc, const char** argv ) {
   leg = new TLegend(0.6,0.7,0.9,0.9);
   for ( int i = 0; i < nJetFinders; ++ i ) {
     hist1D[i][5][baseRad]->SetTitle("Clustering time");
-    hist1D[i][5][baseRad]->GetXaxis()->SetTitle("milliseconds");
+    hist1D[i][5][baseRad]->GetXaxis()->SetTitle("microseconds");
     hist1D[i][5][baseRad]->GetYaxis()->SetTitle("Count");
     hist1D[i][5][baseRad]->SetLineColor(1+i);
     hist1D[i][5][baseRad]->SetLineWidth(2);
