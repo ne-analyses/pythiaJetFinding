@@ -243,6 +243,7 @@ int main ( int argc, const char** argv ) {
     npartGraph[i]->SetLineWidth(2);
     npartGraph[i]->SetMarkerStyle(20+i);
     npartGraph[i]->SetMarkerColor(1+i);
+    npartGraph[i]->GetYaxis()->SetRangeUser(0, 550 );
     
     leg->AddEntry( npartGraph[i], jfString[i].c_str(), "lep"  );
     
@@ -256,6 +257,72 @@ int main ( int argc, const char** argv ) {
   leg->Draw();
   
   c1->SaveAs("tmp/npartleadrad.pdf");
+  
+  // ------------------------------------------------
+  
+  // ------------------------------------------------
+  // produce measures of deltaE ( jet - parton )
+  c1 = new TCanvas();
+  leg = new TLegend(0.6,0.7,0.9,0.9);
+  for ( int i = 0; i < nJetFinders; ++ i ) {
+    hist1D[i][1][baseRad]->SetTitle("E_{Jet} - E_{Parton}");
+    hist1D[i][1][baseRad]->GetXaxis()->SetTitle("#Delta E");
+    hist1D[i][1][baseRad]->GetYaxis()->SetTitle("Count");
+    hist1D[i][1][baseRad]->SetLineColor(1+i);
+    hist1D[i][1][baseRad]->SetLineWidth(2);
+    hist1D[i][1][baseRad]->SetMarkerStyle(20+i);
+    hist1D[i][1][baseRad]->SetMarkerColor(1+i);
+    
+    leg->AddEntry( hist1D[i][1][baseRad], jfString[i].c_str(), "lep"  );
+    if ( i == 0 ) {
+      hist1D[i][1][baseRad]->Draw();
+    }
+    else {
+      hist1D[i][1][baseRad]->Draw("SAME");
+    }
+    
+  }
+  leg->Draw();
+  
+  c1->SaveAs("tmp/deltaEbase.pdf");
+  
+  
+  c1 = new TCanvas();
+  leg = new TLegend(0.1,0.7,0.3,0.9);
+  double deltaE[nJetFinders][nRadii];
+  double deltaEerror[nJetFinders][nRadii];
+  TGraphErrors* deltaEGraph[nJetFinders];
+  for ( int i = 0; i < nJetFinders; ++i ) {
+    for ( int j = 0; j < nRadii; ++j ) {
+      deltaE[i][j] = hist1D[i][1][j]->GetMean();
+      deltaEerror[i][j] = hist1D[i][1][j]->GetRMS();
+    }
+    
+    double shift[nRadii] = { rad[0] + 0.01*i, rad[1] + 0.01*i, rad[2] + 0.01*i, rad[3] + 0.01*i, rad[4] + 0.01*i, rad[5] + 0.01*i, rad[6] + 0.01*i, rad[7] + 0.01*i, rad[8] + 0.01*i, rad[9] + 0.01*i };
+    
+    npartGraph[i] = new TGraphErrors( nRadii, shift, deltaE[i], zeros, deltaEerror[i] );
+    
+    deltaEGraph[i]->SetTitle("Average Number of Particles in Leading Jet");
+    deltaEGraph[i]->GetXaxis()->SetTitle("Radius");
+    deltaEGraph[i]->GetYaxis()->SetTitle("Particle Count");
+    deltaEGraph[i]->SetLineColor(1+i);
+    deltaEGraph[i]->SetLineWidth(2);
+    deltaEGraph[i]->SetMarkerStyle(20+i);
+    deltaEGraph[i]->SetMarkerColor(1+i);
+    deltaEGraph[i]->GetYaxis()->SetRangeUser(0, 550 );
+    
+    leg->AddEntry( deltaEGraph[i], jfString[i].c_str(), "lep"  );
+    
+    if ( i == 0 ) {
+      deltaEGraph[i]->Draw("AP");
+    }
+    else {
+      deltaEGraph[i]->Draw("P");
+    }
+  }
+  leg->Draw();
+  
+  c1->SaveAs("tmp/deltaErad.pdf");
   
   // ------------------------------------------------
   
