@@ -121,7 +121,7 @@ int main ( int argc, const char** argv ) {
   TCanvas c1;
   for ( int i = 0; i < nRadii; ++i ) {
     if ( i == 0)
-    hist1D[0][0][i]->Draw();
+    hist1D[0][2][i]->Draw();
     else
     hist1D[0][0][i]->Draw("same");
   }
