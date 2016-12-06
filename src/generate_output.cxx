@@ -182,7 +182,7 @@ int main ( int argc, const char** argv ) {
     leg->AddEntry( njetGraph[i], jfString[i].c_str(), "lep"  );
     
     if ( i == 0 ) {
-      njetGraph[i]->Draw();
+      njetGraph[i]->Draw("AP");
     }
     else {
       njetGraph[i]->Draw("P");
