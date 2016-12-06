@@ -134,7 +134,7 @@ int main ( int argc, const char** argv ) {
     hist1D[i][0][baseRad]->SetTitle("Number of Jets");
     hist1D[i][0][baseRad]->GetXaxis()->SetTitle("Jets per Event");
     hist1D[i][0][baseRad]->GetYaxis()->SetTitle("Count");
-    hist1D[i][0][baseRad]->SetLineColor(i);
+    hist1D[i][0][baseRad]->SetLineColor(1+i);
     hist1D[i][0][baseRad]->SetLineWidth(2);
     hist1D[i][0][baseRad]->SetMarkerStyle(20+i);
     hist1D[i][0][baseRad]->SetMarkerColor(i);
