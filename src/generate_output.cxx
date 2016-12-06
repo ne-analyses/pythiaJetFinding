@@ -123,7 +123,7 @@ int main ( int argc, const char** argv ) {
     if ( i == 0)
     hist1D[0][2][i]->Draw();
     else
-    hist1D[0][0][i]->Draw("same");
+    hist1D[0][2][i]->Draw("same");
   }
   c1.SaveAs("test.pdf");
   
