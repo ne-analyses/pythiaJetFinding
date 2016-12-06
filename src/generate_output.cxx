@@ -179,7 +179,7 @@ int main ( int argc, const char** argv ) {
     njetGraph[i]->SetMarkerStyle(20+i);
     njetGraph[i]->SetMarkerColor(1+i);
     
-    leg->AddEntry( njetGraph[i], jfString[i].c_str(), "p"  );
+    leg->AddEntry( njetGraph[i], jfString[i].c_str(), "lep"  );
     
     if ( i == 0 ) {
       njetGraph[i]->Draw("AP");
@@ -207,7 +207,7 @@ int main ( int argc, const char** argv ) {
     hist1D[i][4][baseRad]->SetMarkerStyle(20+i);
     hist1D[i][4][baseRad]->SetMarkerColor(1+i);
     
-    leg->AddEntry( hist1D[i][4][baseRad], jfString[i].c_str(), "p"  );
+    leg->AddEntry( hist1D[i][4][baseRad], jfString[i].c_str(), "lep"  );
     if ( i == 0 ) {
       hist1D[i][4][baseRad]->Draw();
     }
@@ -245,7 +245,7 @@ int main ( int argc, const char** argv ) {
     npartGraph[i]->SetMarkerColor(1+i);
     npartGraph[i]->GetYaxis()->SetRangeUser(0, 550 );
     
-    leg->AddEntry( npartGraph[i], jfString[i].c_str(), "p"  );
+    leg->AddEntry( npartGraph[i], jfString[i].c_str(), "lep"  );
     
     if ( i == 0 ) {
       npartGraph[i]->Draw("AP");
@@ -273,7 +273,7 @@ int main ( int argc, const char** argv ) {
     hist1D[i][1][baseRad]->SetMarkerStyle(20+i);
     hist1D[i][1][baseRad]->SetMarkerColor(1+i);
     
-    leg->AddEntry( hist1D[i][1][baseRad], jfString[i].c_str(), "p"  );
+    leg->AddEntry( hist1D[i][1][baseRad], jfString[i].c_str(), "lep"  );
     if ( i == 0 ) {
       hist1D[i][1][baseRad]->Draw();
     }
@@ -309,7 +309,7 @@ int main ( int argc, const char** argv ) {
     deltaEGraph[i]->SetMarkerStyle(20+i);
     deltaEGraph[i]->SetMarkerColor(1+i);
     
-    leg->AddEntry( deltaEGraph[i], jfString[i].c_str(), "p"  );
+    leg->AddEntry( deltaEGraph[i], jfString[i].c_str(), "lep"  );
     
     if ( i == 0 ) {
       deltaEGraph[i]->Draw("AP");
@@ -337,7 +337,7 @@ int main ( int argc, const char** argv ) {
     hist1D[i][2][baseRad]->SetMarkerStyle(20+i);
     hist1D[i][2][baseRad]->SetMarkerColor(1+i);
     
-    leg->AddEntry( hist1D[i][2][baseRad], jfString[i].c_str(), "p"  );
+    leg->AddEntry( hist1D[i][2][baseRad], jfString[i].c_str(), "lep"  );
     if ( i == 0 ) {
       hist1D[i][2][baseRad]->Draw();
     }
@@ -373,7 +373,7 @@ int main ( int argc, const char** argv ) {
     deltaRGraph[i]->SetMarkerStyle(20+i);
     deltaRGraph[i]->SetMarkerColor(1+i);
     
-    leg->AddEntry( deltaRGraph[i], jfString[i].c_str(), "p"  );
+    leg->AddEntry( deltaRGraph[i], jfString[i].c_str(), "lep"  );
     
     if ( i == 0 ) {
       deltaRGraph[i]->Draw("AP");
