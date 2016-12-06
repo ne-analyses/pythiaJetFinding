@@ -166,6 +166,9 @@ int main ( int argc, const char** argv ) {
       njet[i][j] = hist1D[i][0][j]->GetMean();
       njeterror[i][j] = hist1D[i][0][j]->GetRMS();
     }
+    
+    double shift[nRadii] = { rad[0] + 0.01*i, rad[1] + 0.01*i, rad[2] + 0.01*i, rad[3] + 0.01*i, rad[4] + 0.01*i, rad[5] + 0.01*i, rad[6] + 0.01*i, rad[7] + 0.01*i, rad[8] + 0.01*i, rad[9] + 0.01*i };
+    
     njetGraph[i] = new TGraphErrors( nRadii, rad, njet[i], zeros, njeterror[i] );
     
     njetGraph[i]->SetTitle("Average Number of Jets");
@@ -176,7 +179,7 @@ int main ( int argc, const char** argv ) {
     njetGraph[i]->SetMarkerStyle(20+i);
     njetGraph[i]->SetMarkerColor(1+i);
     
-    leg->AddEntry( njetGraph[i], radii[i].c_str(), "lep"  );
+    leg->AddEntry( njetGraph[i], jfString[i].c_str(), "lep"  );
     
     if ( i == 0 ) {
       njetGraph[i]->Draw();
