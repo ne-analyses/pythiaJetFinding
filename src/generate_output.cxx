@@ -452,6 +452,71 @@ int main ( int argc, const char** argv ) {
   
   // ------------------------------------------------
   
+  // ------------------------------------------------
+  // produce measures of leading jet Area
+  c1 = new TCanvas();
+  leg = new TLegend(0.6,0.7,0.9,0.9);
+  for ( int i = 0; i < nJetFinders; ++ i ) {
+    hist1D[i][7][baseRad]->SetTitle("Leading Jet Area");
+    hist1D[i][7][baseRad]->GetXaxis()->SetTitle("Area");
+    hist1D[i][7][baseRad]->GetYaxis()->SetTitle("Count");
+    hist1D[i][7][baseRad]->SetLineColor(1+i);
+    hist1D[i][7][baseRad]->SetLineWidth(2);
+    hist1D[i][7][baseRad]->SetMarkerStyle(20+i);
+    hist1D[i][7][baseRad]->SetMarkerColor(1+i);
+    
+    leg->AddEntry( hist1D[i][7][baseRad], jfString[i].c_str(), "lep"  );
+    if ( i == 0 ) {
+      hist1D[i][7][baseRad]->Draw();
+    }
+    else {
+      hist1D[i][7][baseRad]->Draw("SAME");
+    }
+    
+  }
+  leg->Draw();
+  
+  c1->SaveAs("tmp/areabase.pdf");
+  
+  c1 = new TCanvas();
+  leg = new TLegend(0.6,0.7,0.6,0.9);
+  double area[nJetFinders][nRadii];
+  double areaerror[nJetFinders][nRadii];
+  TGraphErrors* areaGraph[nJetFinders];
+  for ( int i = 0; i < nJetFinders; ++i ) {
+    for ( int j = 0; j < nRadii; ++j ) {
+      area[i][j] = hist1D[i][7][j]->GetMean();
+      areaerror[i][j] = hist1D[i][7][j]->GetRMS();
+    }
+    
+    double shift[nRadii] = { rad[0] + 0.01*i, rad[1] + 0.01*i, rad[2] + 0.01*i, rad[3] + 0.01*i, rad[4] + 0.01*i, rad[5] + 0.01*i, rad[6] + 0.01*i, rad[7] + 0.01*i, rad[8] + 0.01*i, rad[9] + 0.01*i };
+    
+    areaGraph[i] = new TGraphErrors( nRadii, shift, area[i], zeros, zeros );
+    
+    areaGraph[i]->SetTitle("Leading Jet Area");
+    areaGraph[i]->GetXaxis()->SetTitle("Radius");
+    areaGraph[i]->GetYaxis()->SetTitle("Area");
+    areaGraph[i]->SetLineColor(1+i);
+    areaGraph[i]->SetLineWidth(2);
+    areaGraph[i]->SetMarkerStyle(20+i);
+    areaGraph[i]->SetMarkerColor(1+i);
+    
+    leg->AddEntry( areaGraph[i], jfString[i].c_str(), "lep"  );
+    
+    if ( i == 0 ) {
+      areaGraph[i]->Draw("AP");
+    }
+    else {
+      areaGraph[i]->Draw("P");
+    }
+  }
+  //leg->Draw();
+  
+  c1->SaveAs("tmp/arearad.pdf");
+  
+  // ------------------------------------------------
+
+  
   return 0;
 }
 
